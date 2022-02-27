@@ -1,0 +1,34 @@
+.td_class
+{
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
+
+.td_class:hover
+{
+    color: crimson;
+}
+
+.book_class
+{
+    margin-top: 15;
+}
+
+.book_class_title
+{
+    font-weight: 500;
+    font-size:1.5rem;
+}
+
+.book_class_ed
+{
+    font-weight: 500;
+    font-size:1.2rem;
+}
+
+.myRes
+{
+    font-weight: 400;
+    font-size:1.3rem;
+}
