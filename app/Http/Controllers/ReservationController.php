@@ -43,11 +43,13 @@ class ReservationController extends Controller
 
             $stock->available_number = $stock->available_number - 1;
             $stock->save();
-            // session(['res' => 'Foglalás Sikeres!']);
-        } //else {
-            // session(['res' => 'Egyszerre nem foglalhatsz, vagy kölcsönözhetsz több könyvet!']);
-        //}
-        return redirect('/myreservations');
+            session(['reservation' => 'Foglalás Sikeres!']);
+            return redirect('/myreservations');
+        }else {
+            session(['reservation' => 'Egyszerre nem foglalhatsz, vagy kölcsönözhetsz több könyvet!']);
+            return redirect('/books-available');
+        }
+
     }
 
     function showMyReservations()
@@ -89,7 +91,7 @@ class ReservationController extends Controller
             ->update(['current' => $current - 1]);
 
         $res->delete();
-        // session(['deleteres' => 'Foglalás törölve!']);
+        session(['deleteReservation' => 'Foglalás törölve!']);
         return redirect('/myreservations');
     }
 
@@ -98,7 +100,7 @@ class ReservationController extends Controller
         $data = DB::table('reservations')
             ->join('books', 'reservations.isbn', "=", 'books.isbn')
             ->join('users', 'reservations.email', "=", 'users.email')
-            ->select('title', 'name', 'reservations.isbn', 'expiry', 'reservations.id','picture','writer', 'release', 'edition',)
+            ->select('title', 'name', 'reservations.email', 'reservations.isbn', 'expiry', 'reservations.id','picture','writer', 'release', 'edition',)
             ->orderBy('reservations.expiry', 'asc')
             ->get();
         return view('employee/reservations', ['reservations' => $data]);

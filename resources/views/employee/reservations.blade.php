@@ -15,8 +15,8 @@
                             <th scope="col">Cím</th>
                             <th scope="col">ISBN</th>
                             <th scope="col">Író</th>
-                            <th scope="col">Kiadás éve</th>
-                            <th scope="col">Kiadás</th>
+                            <th scope="col">Foglaló</th>
+                            <th scope="col">Email</th>
                             <th></th>
                           </tr>
                         </thead>
@@ -37,10 +37,10 @@
                                         {{ $item->writer }}
                                     </td>
                                     <td class="myRes">
-                                        {{ $item->release }}
+                                        {{ $item->name }}
                                     </td>
                                     <td class="myRes">
-                                        {{ $item->edition }}
+                                        {{ $item->email }}
                                     </td>
                                     <td>
                                         <a href="/out-from-res/{{ $item->id }}"><button class="btn btn-primary">Könyv kiadása</button></a>

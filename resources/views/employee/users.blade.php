@@ -35,5 +35,10 @@
         </div>
     </div>
 </div>
-
+<?php
+    if(session()->has('profileUpdateAsEmployee')){
+        echo "<script>alert('".session('profileUpdateAsEmployee')."');</script>";
+        session()->forget('profileUpdateAsEmployee');
+    }
+?>
 @endsection

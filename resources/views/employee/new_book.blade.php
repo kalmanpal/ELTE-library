@@ -110,5 +110,10 @@
         </div>
     </div>
 </div>
-
+<?php
+if(session()->has('newBookFailed')){
+    echo "<script>alert('".session('newBookFailed')."');</script>";
+    session()->forget('newBookFailed');
+}
+?>
 @endsection

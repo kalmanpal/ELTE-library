@@ -61,4 +61,10 @@
         </div>
     </div>
 </div>
+<?php
+    if(session()->has('profileUpdate')){
+        echo "<script>alert('".session('profileUpdate')."');</script>";
+        session()->forget('profileUpdate');
+    }
+?>
 @endsection

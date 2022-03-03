@@ -40,7 +40,7 @@ Route::group(['middleware' => ['empPages']], function(){
     Route::get('/edit-book/{id}',[BookController::class,'edit']);
     Route::put('/update-book/{id}',[BookController::class,'update']);
 
-    Route::get('/users',[UserController::class,'show']);
+    Route::get('/users',[UserController::class,'showUsers']);
     Route::get('/member/{id}',[UserController::class,'index']);
     Route::put('/update-member-data/{id}',[UserController::class,'updateAsEmp']);
 

@@ -11,10 +11,13 @@ class UserController extends Controller
 {
     //
 
-    function show()
+    function showUsers()
     {
         $data= DB::table('users')
         ->orderBy('name', 'asc')
+        ->where('type', '=', 'ES')
+        ->orwhere('type', '=', 'ET')
+        ->orwhere('type', '=', 'O')
         ->get();
         return view('employee/users',['users'=>$data]);
     }
@@ -28,10 +31,10 @@ class UserController extends Controller
             $user-> city=$req->city;
             $user-> address=$req->address;
             $user-> save();
-            // session(['updatedata' => 'Az adatok módosítása sikerült!']);
-            return redirect('/home');
+            session(['profileUpdate' => 'Az adatok módosítása sikerült!']);
+            return redirect('/profile');
         }else{
-        //     session(['updatedata' => 'Az adatok módosítása nem sikerült, ellenőrizze, hogy a megfelelő jelszót írta be!']);
+             session(['profileUpdate' => 'Az adatok módosítása nem sikerült, ellenőrizze, hogy a megfelelő jelszót írta be!']);
              return redirect('/profile');
         }
     }
@@ -50,6 +53,7 @@ class UserController extends Controller
         $member->address=$req->address;
         $member->type=$req->type;
         $member-> update();
+        session(['profileUpdateAsEmployee' => 'A felhasználó adatai módosultak!']);
         return redirect('users');
     }
 

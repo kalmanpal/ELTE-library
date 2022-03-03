@@ -21,16 +21,12 @@ class BookController extends Controller
     function addBook(Request $req)
     {
 
-         # check
-         $books = Book::where('isbn', $req->isbn)->get();
-
-         # check if more than 1
-        //  if(sizeof($books) > 0){
-        //      # tell user not to duplicate same
-        //      $msg = 'Ezzel az isbn-el van már könyv felvéve';
-        //      session(['isbnExistError' => $msg]);
-        //      return back();
-        //  }
+        $books = Book::where('isbn', $req->isbn)->get();
+        if(sizeof($books) > 0){
+            $msg = 'Ezzel az isbn-el van már könyv felvéve!';
+            session(['newBookFailed' => 'Ezzel az ISBN számmal már létezik egy könyv a rendszerben!']);
+            return redirect('/newbook');
+        }
 
         $book = new Book;
         $book->isbn = $req->isbn;
@@ -50,8 +46,7 @@ class BookController extends Controller
         $stock->available_number = $req->max_number;
         $stock->save();
 
-        // session(['newbook' => 'A könyv bekerült a rendszerbe!']);
-
+        session(['newBook' => 'A könyv bekerült a rendszerbe!']);
         return redirect('/books');
     }
 
@@ -88,6 +83,7 @@ class BookController extends Controller
         $stocks->max_number = $req->max_number;
         $stocks->available_number = $req->max_number;
         $stocks->update();
+        session(['bookUpdate' => 'Az könyv adatok módosítása sikerült!']);
         return redirect('books');
     }
 

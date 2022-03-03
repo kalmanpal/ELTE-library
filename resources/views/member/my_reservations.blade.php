@@ -56,5 +56,15 @@
         </div>
     </div>
 </div>
+<?php
+    if(session()->has('reservation')){
+        echo "<script>alert('".session('reservation')."');</script>";
+        session()->forget('reservation');
+    }
 
+    if(session()->has('deleteReservation')){
+        echo "<script>alert('".session('deleteReservation')."');</script>";
+        session()->forget('deleteReservation');
+    }
+?>
 @endsection

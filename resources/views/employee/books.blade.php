@@ -52,13 +52,20 @@
                                 </tr>
                             @endforeach
                         </tbody>
-
-
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+<?php
+    if(session()->has('newBook')){
+        echo "<script>alert('".session('newBook')."');</script>";
+        session()->forget('newBook');
+    }
 
+    if(session()->has('bookUpdate')){
+        echo "<script>alert('".session('bookUpdate')."');</script>";
+        session()->forget('bookUpdate');
+}
+?>
 @endsection
