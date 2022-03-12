@@ -66,13 +66,11 @@ class RentalController extends Controller
 
         if ($type == "ES") {
             $rent->deadline = Carbon::today()->addMonth(3);
-        } else
-
-        if ($type == "ET") {
+        } elseif($type == "ET")
+        {
             $rent->deadline = Carbon::today()->addMonth(6);
-        } else
-
-        if ($type == "O") {
+        } elseif($type == "O")
+        {
             $rent->deadline = Carbon::today()->addMonth(1);
         }
 
@@ -110,15 +108,15 @@ class RentalController extends Controller
             ->where('rentals.isbn', '=', $rent->isbn)
             ->get();
 
-        $number = $seged[0]->number;
+        $number = $seged[0]->available_number;
 
         $stock = DB::table('stocks')
             ->where('stocks.isbn', $rent->isbn)
-            ->update(['number' => $number + 1]);
+            ->update(['available_number' => $number + 1]);
 
         //session(['bookback' => 'A könyv visszahozva!']);
 
-        return redirect('/rental-history');
+        return redirect('/closed-rentals');
     }
 
 

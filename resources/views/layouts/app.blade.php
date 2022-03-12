@@ -84,7 +84,7 @@
                                         </a>
 
                                         <a class="dropdown-item" href="/closed-rentals">
-                                            Régebbi kölcsönzések
+                                            Lezárt kölcsönzések
                                         </a>
 
                                     </div>
