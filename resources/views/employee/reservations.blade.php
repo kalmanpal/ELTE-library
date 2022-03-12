@@ -43,7 +43,7 @@
                                         {{ $item->email }}
                                     </td>
                                     <td>
-                                        <a href="/out-from-res/{{ $item->id }}"><button class="btn btn-primary">Könyv kiadása</button></a>
+                                        <a  href="rent-from-res/{{ $item->id }}"><button class="btn btn-primary">Könyv kiadása</button></a>
                                     </td>
                                 </tr>
                             @endforeach

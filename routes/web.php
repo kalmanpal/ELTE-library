@@ -45,8 +45,12 @@ Route::group(['middleware' => ['empPages']], function(){
     Route::put('/update-member-data/{id}',[UserController::class,'updateAsEmp']);
 
     Route::get('/reservations',[ReservationController::class,'showAllReservations']);
+    Route::get('rent-from-res/{id}',[RentalController::class,'rentFromReservations']);
 
-    Route::get('/rentals',[RentalController::class,'showRentals']);
+    Route::get('/active-rentals',[RentalController::class,'showActiveRentals']);
+    Route::get('/closed-rentals',[RentalController::class,'showClosedRentals']);
+
+    Route::get('book-is-back/{id}',[RentalController::class,'bookIsBack']);
 });
 
 //--------------------------------------------------MEMBER----------------------------------------------------------------------
@@ -77,5 +81,6 @@ Route::group(['middleware' => ['comPages']], function(){
 Route::get('/badges', function () {
     return view('member/badges');
 });
+
 
 

@@ -79,11 +79,11 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="/rentals">
+                                        <a class="dropdown-item" href="/active-rentals">
                                             Aktív kölcsönzések
                                         </a>
 
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="/closed-rentals">
                                             Régebbi kölcsönzések
                                         </a>
 
@@ -122,7 +122,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/myrentals">Kölcsönzés előzményeim</a>
+                                    <a class="nav-link" href="/myrentals">Kölcsönzéseim</a>
                                 </li>
 
                             @endif
