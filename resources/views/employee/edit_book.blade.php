@@ -87,6 +87,25 @@
                             </div>
                         </div>
                     </form>
+
+                    <p></p>
+
+                    <form method="GET" action="/rent/{{$books->id}}" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="row mb-3">
+                            <label for="rent" class="col-md-4 col-form-label text-md-end">Kölcsönző email címe</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="mail" required>
+                            </div>
+                        </div>
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <input type="submit" value="Könyv kiadása" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>

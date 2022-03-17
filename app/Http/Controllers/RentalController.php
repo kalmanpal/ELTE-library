@@ -120,5 +120,67 @@ class RentalController extends Controller
     }
 
 
+    function rentBook(Request $requested, $id)
+    {
+
+        $user = DB::table('users')
+            ->where('users.email', "=", $requested->mail)
+            ->get();
+
+        if($user->isNotEmpty()){
+
+            $email = $user[0]->email;
+
+            $book = Book::find($id);
+            $stock = Stock::find($id);
+
+            $rental = New Rental();
+            $rental->out_date = Carbon::today();
+            $rental->isbn = $stock->isbn;
+            $rental->email = $email;
+
+            $type = $user[0]->type;
+            $current = $user[0]->current;
+            $max = $user[0]->max;
+
+            if ($type == "ES") {
+                $rental->deadline = Carbon::today()->addMonth(3);
+            } elseif($type == "ET")
+            {
+                $rental->deadline = Carbon::today()->addMonth(6);
+            } elseif($type == "O")
+            {
+                $rental->deadline = Carbon::today()->addMonth(1);
+            }
+
+            if (($current < $max) && ($stock->available_number > 0)) {
+
+                $rental->save();
+                $userToSave = DB::table('users')
+                    ->where('users.email', $email)
+                    ->update(['current' => $current + 1]);
+
+                $stock->available_number = $stock->available_number - 1;
+                $stock->save();
+
+                session(['rent' => 'A könyv sikeresen kikölcsönözve!']);
+                return redirect('/active-rentals');
+
+            }else{
+                session(['rent' => 'A kölcsönzés sikertelen, a felhasználó már elérte a neki kiszabott kölcsönzési limitet, vagy jelenleg nincs készleten ez a könyv!']);
+                return redirect('/books');
+            }
+
+        }else{
+
+            session(['rent' => 'A kölcsönzés sikertelen, nincs a megadott email címmel regisztrált felhasználó!']);
+            return redirect('/books');
+
+        }
+
+    }
+
+
+
 
 }

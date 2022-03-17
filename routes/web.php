@@ -83,4 +83,4 @@ Route::get('/badges', function () {
 });
 
 
-
+Route::get('/rent/{id}',[RentalController::class,'rentBook']);

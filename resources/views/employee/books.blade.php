@@ -66,6 +66,10 @@
     if(session()->has('bookUpdate')){
         echo "<script>alert('".session('bookUpdate')."');</script>";
         session()->forget('bookUpdate');
-}
+    }
+    if(session()->has('rent')){
+        echo "<script>alert('".session('rent')."');</script>";
+        session()->forget('rent');
+    }
 ?>
 @endsection
