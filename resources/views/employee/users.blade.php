@@ -40,5 +40,10 @@
         echo "<script>alert('".session('profileUpdateAsEmployee')."');</script>";
         session()->forget('profileUpdateAsEmployee');
     }
+
+    if(session()->has('newUser')){
+        echo "<script>alert('".session('newUser')."');</script>";
+        session()->forget('newUser');
+    }
 ?>
 @endsection

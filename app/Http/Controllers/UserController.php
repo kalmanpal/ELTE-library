@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PwEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -57,7 +59,70 @@ class UserController extends Controller
         return redirect('users');
     }
 
+    public function addUser(Request $req)
+    {
+
+        $userToCheck = DB::table('users')
+            ->where('users.email', "=", $req->email)
+            ->get();
+
+        if($userToCheck->isEmpty())
+        {
+
+            $user = new User;
+            $user-> email=$req->email;
+            $user-> name=$req->name;
+            $user-> city=$req->city;
+            $user-> address=$req->address;
+            $user-> type=$req->type;
+
+            if($req->type === "ES")
+            {
+                $user->max = 10;
+
+            }elseif($req->type === "ET")
+            {
+                $user->max = 20;
+
+            }elseif($req->type === "O")
+            {
+                $user->max = 5;
+            }
+
+            $user-> password=bcrypt($req->password);
+
+            $data = [
+                'name' => $req->name,
+                'email' => $req->email,
+                'password' => $req->password,
+            ];
+
+            Mail::to('eltekonyvtar2022@gmail.com')->send(new PwEmail($data));
+
+            $user-> save();
+
+            session(['newUser' => 'Az új felhasználó sikeresen regisztrálva!']);
+            return redirect('/users');
+
+        }else
+        {
+            session(['newUser' => 'A regisztráció sikertelen, ezzel az email címmel már van regisztrált felhasználó!']);
+            return redirect('/new-user');
+        }
 
 
+    }
+
+    public function sendEmail(Request $req)
+    {
+        $data = [
+            'name' => $req->name,
+            'address' => $req->address,
+            'email' => $req->email,
+            'password' => $req->password,
+        ];
+
+        Mail::to('eltekonyvtar2022@gmail.com')->send(new PwEmail($data));
+    }
 
 }

@@ -45,12 +45,17 @@ Route::group(['middleware' => ['empPages']], function(){
     Route::put('/update-member-data/{id}',[UserController::class,'updateAsEmp']);
 
     Route::get('/reservations',[ReservationController::class,'showAllReservations']);
+
+    Route::get('/rent/{id}',[RentalController::class,'rentBook']);
     Route::get('rent-from-res/{id}',[RentalController::class,'rentFromReservations']);
 
     Route::get('/active-rentals',[RentalController::class,'showActiveRentals']);
     Route::get('/closed-rentals',[RentalController::class,'showClosedRentals']);
 
     Route::get('book-is-back/{id}',[RentalController::class,'bookIsBack']);
+
+    Route::view('/new-user','employee/new_user');
+    Route::get('/add-user', [UserController::class,'addUser']);
 });
 
 //--------------------------------------------------MEMBER----------------------------------------------------------------------
@@ -83,4 +88,5 @@ Route::get('/badges', function () {
 });
 
 
-Route::get('/rent/{id}',[RentalController::class,'rentBook']);
+
+

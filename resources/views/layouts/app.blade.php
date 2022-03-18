@@ -104,7 +104,7 @@
                                             Összes felhasználó
                                         </a>
 
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="/new-user">
                                             Új felhasználó
                                         </a>
 
