@@ -110,19 +110,6 @@ class UserController extends Controller
             return redirect('/new-user');
         }
 
-
-    }
-
-    public function sendEmail(Request $req)
-    {
-        $data = [
-            'name' => $req->name,
-            'address' => $req->address,
-            'email' => $req->email,
-            'password' => $req->password,
-        ];
-
-        Mail::to('eltekonyvtar2022@gmail.com')->send(new PwEmail($data));
     }
 
 }
