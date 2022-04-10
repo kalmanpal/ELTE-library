@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Subscription;
+use App\Models\Suggestion;
+use App\Models\Badge;
 
 class UserController extends Controller
 {
@@ -100,6 +103,18 @@ class UserController extends Controller
             Mail::to('eltekonyvtar2022@gmail.com')->send(new PwEmail($data));
 
             $user-> save();
+
+            $suggestion = new Suggestion;
+            $suggestion->email = $req->email;
+            $suggestion->save();
+
+            $badges = new Badge;
+            $badges->email = $req->email;
+            $badges->save();
+
+            $subs = new Subscription;
+            $subs->email = $req->email;
+            $subs->save();
 
             session(['newUser' => 'Az új felhasználó sikeresen regisztrálva!']);
             return redirect('/users');
