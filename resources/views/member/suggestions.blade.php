@@ -8,20 +8,8 @@
                 <div class="card-header">Neked ajánljuk</div>
                 <div class="card-body">
 
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Cím</th>
-                            <th scope="col">ISBN</th>
-                            <th scope="col">Író</th>
-                            <th scope="col">Kiadás éve</th>
-                            <th scope="col">Kiadás</th>
-                          </tr>
-                        </thead>
 
-                        <tbody>
-                            @foreach ($books as $item)
+                            {{-- @foreach ($books as $item)
                                 <tr id="{{ $item->id }}" href>
                                     <td>
                                         <img src="{{ asset('storage/app/pictures/'.$item->picture) }}" class="w-10">
@@ -42,9 +30,29 @@
                                         {{ $item->edition }}
                                     </td>
                                 </tr>
-                            @endforeach
-                        </tbody>
+                            @endforeach --}}
 
+
+
+
+                        <div class="container">
+                            <div class="row">
+                              <div class="col">
+                                @foreach ($books as $item)
+                                    <div class="card" style="width: 18rem;">
+                                        <img src="https://s04.static.libri.hu/cover/f0/3/1243841_5.jpg" height="250" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $item->title }}</h5>
+                                            <p class="card-text">{{ $item->isbn }}</p>
+                                            <p class="card-text">{{ $item->writer }}</p>
+                                            <p class="card-text">{{ $item->edition }}</p>
+                                            <p class="card-text">{{ $item->release }}</p>
+                                        </div>
+                                  </div>
+                                @endforeach
+                              </div>
+                            </div>
+                          </div>
 
 
                 </div>

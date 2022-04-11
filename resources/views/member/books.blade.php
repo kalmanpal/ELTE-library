@@ -17,7 +17,6 @@
                             <th scope="col">Író</th>
                             <th scope="col">Kiadás éve</th>
                             <th scope="col">Kiadás</th>
-                            <th scope="col">Leírás</th>
                           </tr>
                         </thead>
 
@@ -42,14 +41,9 @@
                                     <td>
                                         {{ $item->edition }}
                                     </td>
-                                    <td>
-                                        {{ $item->description }}
-                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
-
-
 
                 </div>
             </div>
