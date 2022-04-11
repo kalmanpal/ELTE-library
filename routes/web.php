@@ -5,6 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RentalController;
+use App\Http\Controllers\SuggestionController;
 use GuzzleHttp\Middleware;
 
 /*
@@ -87,6 +88,7 @@ Route::get('/badges', function () {
     return view('member/badges');
 });
 
+Route::get('/suggestions',[SuggestionController::class,'makeSuggestions']);
 
 
 

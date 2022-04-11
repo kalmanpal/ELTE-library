@@ -125,6 +125,10 @@
                                     <a class="nav-link" href="/myrentals">Kölcsönzéseim</a>
                                 </li>
 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/suggestions"> Neked ajánlottak</a>
+                                </li>
+
                             @endif
 
 
