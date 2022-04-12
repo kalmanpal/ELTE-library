@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubscriptionsTable extends Migration
+class CreateOldsubsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,12 @@ class CreateSubscriptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscriptions', function (Blueprint $table) {
+        Schema::create('oldsubs', function (Blueprint $table) {
             $table->id();
             $table->string('email');
             $table->foreign('email')->references('email')->on('users');
-            $table->integer('all_months')->default('0');
-            $table->boolean('active')->default('0');
-            $table->date('subexpiry');
-            $table->integer('streak')->default('0');
-            $table->integer('discounts')->default('0');
-            $table->integer('plus_charge')->default('0');
+            $table->date('from');
+            $table->date('to');
             $table->timestamps();
         });
     }
@@ -34,6 +30,6 @@ class CreateSubscriptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('oldsubs');
     }
 }
