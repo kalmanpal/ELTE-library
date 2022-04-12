@@ -69,6 +69,8 @@ Route::group(['middleware' => ['memPages']], function(){
     Route::get('/myreservations',[ReservationController::class,'showMyReservations']);
     Route::get('/deleteReservation/{id}',[ReservationController::class,'delete']);
     Route::get('/myrentals',[RentalController::class,'showMyRentals']);
+
+    Route::get('/suggestions',[SuggestionController::class,'makeSuggestions']);
 });
 
 //---------------------------------------------COMMON----------------------------------------------------------------------------
@@ -88,7 +90,7 @@ Route::get('/badges', function () {
     return view('member/badges');
 });
 
-Route::get('/suggestions',[SuggestionController::class,'makeSuggestions']);
+
 
 
 
