@@ -55,7 +55,8 @@ class BookController extends Controller
     {
         $data = DB::table('books')->join('stocks', 'books.isbn', "=", 'stocks.isbn')
         ->orderBy('title', 'asc')
-        ->get();
+        ->paginate(4);
+
         return view('employee/books', ['books' => $data]);
     }
 
@@ -93,7 +94,7 @@ class BookController extends Controller
         $data = DB::table('stocks')->join('books', 'stocks.isbn', "=", 'books.isbn')
         ->where('stocks.available_number', '>', 0)
         ->orderBy('title', 'asc')
-        ->get();
+        ->paginate(4);
         return view('member/books', ['books' => $data]);
     }
 

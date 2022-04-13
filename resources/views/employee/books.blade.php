@@ -3,12 +3,12 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Könyvek</div>
                 <div class="card-body">
 
-                    <table class="table">
+                    {{-- <table class="table">
                         <thead>
                           <tr>
                             <th scope="col"></th>
@@ -51,11 +51,32 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        </tbody>
+                        </tbody> --}}
+
+
+                        <div class="webshop-container">
+                            @foreach ($books as $item)
+                                <a class="no-underline" href="{{ url('edit-book/'.$item->id) }}">
+                                    <div class="card" style="width: 15rem;">
+                                        <img class="book-image" src="https://s04.static.libri.hu/cover/f0/3/1243841_5.jpg" class="card-img-top" alt="...">
+                                        <div class="card-body" style="height: 195px">
+                                            <h5 class="card-title">{{ $item->title }}</h5>
+                                            <p class="card-text card-remove-gap">{{ $item->isbn }}</p>
+                                            <p class="card-text card-remove-gap">{{ $item->writer }}</p>
+                                            <p class="card-text card-remove-gap">{{ $item->release }}</p>
+                                            <p class="card-text card-remove-gap">Összes: {{ $item->max_number }}</p>
+                                            <p class="card-text card-remove-gap">Elérhető: {{ $item->available_number }}</p>
+                                        </div>
+                                  </div>
+                                </a>
+                            @endforeach
+                        </div>
                 </div>
             </div>
+            {{$books->links()}}
         </div>
     </div>
+
 </div>
 <?php
     if(session()->has('newBook')){

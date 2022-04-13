@@ -9,8 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -185,7 +183,9 @@
         </main>
     </div>
 
+
     <!-- Scripts -->
     <script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}" defer></script>
+
 </body>
 </html>

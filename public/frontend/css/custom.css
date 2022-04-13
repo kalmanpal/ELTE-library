@@ -32,3 +32,44 @@
     font-weight: 400;
     font-size:1.3rem;
 }
+
+.webshop-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    grid-gap: 30px 0;
+}
+
+.card-remove-gap{
+    margin: 0 0;
+}
+
+.book-image{
+    height: 250px;
+    object-fit:contain;
+}
+
+.no-underline{
+    text-decoration: none;
+    color: black;
+}
+
+.no-underline:hover{
+    text-decoration: none;
+    color: black;
+}
+
+.bottom-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nameofbadge{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.badge-text{
+    margin: 0 0;
+}
