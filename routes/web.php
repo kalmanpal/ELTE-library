@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\SuggestionController;
+use App\Http\Controllers\BadgeController;
 use GuzzleHttp\Middleware;
 
 /*
@@ -86,10 +87,7 @@ Route::group(['middleware' => ['comPages']], function(){
 
 //--------------------------------------------------NOT FINISHED------------------------------------------------------
 
-Route::get('/badges', function () {
-    return view('member/badges');
-});
-
+Route::get('/badges',[BadgeController::class,'numbersForBadges']);
 
 
 
