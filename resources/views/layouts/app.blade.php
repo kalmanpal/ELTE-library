@@ -144,7 +144,7 @@
 
                                     @if (!(Auth::user()->type == 'E'))
 
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="/subscriptions">
                                             Előfizetések
                                         </a>
 

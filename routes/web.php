@@ -7,6 +7,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\BadgeController;
+use App\Http\Controllers\OldsubController;
 use GuzzleHttp\Middleware;
 
 /*
@@ -91,7 +92,7 @@ Route::group(['middleware' => ['comPages']], function(){
 
 //--------------------------------------------------NOT FINISHED------------------------------------------------------
 
-
+Route::get('/subscriptions',[OldsubController::class,'showMySubs']);
 
 
 
