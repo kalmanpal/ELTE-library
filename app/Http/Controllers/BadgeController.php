@@ -20,19 +20,19 @@ class BadgeController extends Controller
             ->get();
         $allRentsNumber = $allRentals->count();
 
-        if(($allRentsNumber >= 5)&($dataToUpdate->five != 1)){
-            $dataToUpdate->five = 1;
-            $dataToUpdate->save();
+        if(($allRentsNumber >= 5)&($dataToUpdate[0]->five != 1)){
+            $dataToUpdate[0]->five = 1;
+            $dataToUpdate[0]->save();
         }
 
-        if(($allRentsNumber >= 10)&($dataToUpdate->ten != 1)){
-            $dataToUpdate->ten = 1;
-            $dataToUpdate->save();
+        if(($allRentsNumber >= 10)&($dataToUpdate[0]->ten != 1)){
+            $dataToUpdate[0]->ten = 1;
+            $dataToUpdate[0]->save();
         }
 
-        if(($allRentsNumber >= 20)&($dataToUpdate->twenty != 1)){
-            $dataToUpdate->twenty = 1;
-            $dataToUpdate->save();
+        if(($allRentsNumber >= 20)&($dataToUpdate[0]->twenty != 1)){
+            $dataToUpdate[0]->twenty = 1;
+            $dataToUpdate[0]->save();
         }
 
         $onTimeRentals = DB::table('rentals')
@@ -48,9 +48,9 @@ class BadgeController extends Controller
             }
         }
 
-        if(($onTimeNumber >= 10)&($dataToUpdate->ontime != 1)){
-            $dataToUpdate->ontime = 1;
-            $dataToUpdate->save();
+        if(($onTimeNumber >= 10)&($dataToUpdate[0]->ontime != 1)){
+            $dataToUpdate[0]->ontime = 1;
+            $dataToUpdate[0]->save();
         }
 
         // $allSubs = DB::table('oldsubs')

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Subscription;
 use App\Models\Suggestion;
 use App\Models\Badge;
+use App\Models\Oldsub;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -47,7 +49,16 @@ class UserController extends Controller
     public function index($id)
     {
         $member = User::find($id);
-        return view('employee.this_member', compact('member'));
+        $subs = DB::table('oldsubs')
+            ->where('oldsubs.email', '=', $member->email)
+            ->get();
+        $isActive = DB::table('subscriptions')
+        ->where('subscriptions.email', '=', $member->email)
+        ->get();
+
+        //dd($isActive[0]);
+
+        return view('employee.this_member', compact('member', 'subs', 'isActive'));
     }
 
     public function updateAsEmp(Request $req, $id)
@@ -125,6 +136,31 @@ class UserController extends Controller
             return redirect('/new-user');
         }
 
+    }
+
+    public function activateSub($id)
+    {
+        $userToActivate = User::find($id);
+
+        $subToSave = new Oldsub();
+        $subToSave->email = $userToActivate->email;
+        $subToSave->from = Carbon::today();
+        $subToSave->to = Carbon::today()->addMonth(6);
+        $subToSave->save();
+
+        $sub = DB::table('subscriptions')
+        ->where('subscriptions.email', '=', $userToActivate->email)
+        ->get();
+
+        $subToUpdate = DB::table('subscriptions')
+            ->where('subscriptions.email', $userToActivate->email)
+            ->update([
+                'all_months' => $sub[0]->all_months + 6,
+                'active'  => '1',
+                'subexpiry' => Carbon::today()->addMonth(6)
+            ]);
+
+        return redirect('/users');
     }
 
 }

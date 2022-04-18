@@ -46,6 +46,8 @@ Route::group(['middleware' => ['empPages']], function(){
     Route::get('/member/{id}',[UserController::class,'index']);
     Route::put('/update-member-data/{id}',[UserController::class,'updateAsEmp']);
 
+    Route::get('/activate/{id}',[UserController::class,'activateSub']);
+
     Route::get('/reservations',[ReservationController::class,'showAllReservations']);
 
     Route::get('/rent/{id}',[RentalController::class,'rentBook']);
@@ -72,6 +74,8 @@ Route::group(['middleware' => ['memPages']], function(){
     Route::get('/myrentals',[RentalController::class,'showMyRentals']);
 
     Route::get('/suggestions',[SuggestionController::class,'makeSuggestions']);
+
+    Route::get('/badges',[BadgeController::class,'numbersForBadges']);
 });
 
 //---------------------------------------------COMMON----------------------------------------------------------------------------
@@ -87,7 +91,7 @@ Route::group(['middleware' => ['comPages']], function(){
 
 //--------------------------------------------------NOT FINISHED------------------------------------------------------
 
-Route::get('/badges',[BadgeController::class,'numbersForBadges']);
+
 
 
 

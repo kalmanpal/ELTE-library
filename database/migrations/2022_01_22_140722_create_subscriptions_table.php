@@ -19,7 +19,7 @@ class CreateSubscriptionsTable extends Migration
             $table->foreign('email')->references('email')->on('users');
             $table->integer('all_months')->default('0');
             $table->boolean('active')->default('0');
-            $table->date('subexpiry');
+            $table->date('subexpiry')->nullable();
             $table->integer('streak')->default('0');
             $table->integer('discounts')->default('0');
             $table->integer('plus_charge')->default('0');

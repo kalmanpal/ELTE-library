@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+<?php
+    use Carbon\Carbon;
+?>
 <head>
     <title>Profil</title>
 </head>
@@ -91,13 +93,60 @@
                             </div>
                         </div>
 
-
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <input type="submit" value="Mentés" class="btn btn-primary">
                             </div>
                         </div>
                     </form>
+
+                    @if ($isActive[0]->active === 0)
+                        <form method="GET" action="/activate/{{$member->id}}">
+                            @csrf
+                            <div class="row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <input type="submit" value="Adatok hitelesek, előfizetés indítása" class="btn btn-success">
+                                </div>
+                            </div>
+                        </form>
+                    @endif
+
+                    <p></p>
+
+                    @if ($isActive[0]->all_months != 0)
+                        <h5>Előfizetések</h5>
+                        <table class="table">
+                            <tbody>
+                                <th>
+                                    Előfizetés kezdete
+                                </th>
+                                <th>
+                                    Előfizetés lejárta
+                                </th>
+                                <th>
+                                    Státusz
+                                </th>
+                                @foreach ($subs as $item)
+                                    <tr>
+                                        <td>
+                                            {{ $item->from }}
+                                        </td>
+                                        <td>
+                                            {{ $item->to }}
+                                        </td>
+                                        <td>
+                                            @if ($item->to >= Carbon::today())
+                                                Aktív
+                                            @else
+                                                Lejárt
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                    @endif
+
+
                 </div>
             </div>
         </div>
