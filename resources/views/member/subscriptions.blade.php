@@ -11,14 +11,21 @@
             <div class="card">
                 <div class="card-header">Előfizetéseim</div>
                 <div class="card-body">
-                    <h6>Összes hónap: {{$allSubs[0]->all_months}}</h6>
-                    @if ($allSubs[0]->active === 1)
-                        <h6>Előfizetés: Aktív, eddig: {{$allSubs[0]->subexpiry}}</h6>
-                    @else
-                        <h6>Előfizetés: Inaktív</h6>
-                    @endif
+                    <div class="sub-container">
+                        <div>
+                            <p>Összes hónap: {{$allSubs[0]->all_months}}</p>
+                            @if ($allSubs[0]->active === 1)
+                                <p>Előfizetés: Aktív, eddig: {{$allSubs[0]->subexpiry}}</p>
+                            @else
+                                <p>Előfizetés: Inaktív</p>
+                            @endif
+                        </div>
+                        <div>
+                            <p>Tartozás: {{$allSubs[0]->plus_charge}} Ft</p>
+                            <p>Kedvezmények: {{$allSubs[0]->discounts}}%</p>
+                        </div>
+                    </div>
 
-                    <p></p>
                     <table class="table">
                         <h6>Korábbi előfizetések</h6>
                         <th>Kezdés</th>
