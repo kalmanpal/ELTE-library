@@ -50,16 +50,36 @@ class UserController extends Controller
     {
         $member = User::find($id);
         $subs = DB::table('oldsubs')
-            ->where('oldsubs.email', '=', $member->email)
-            ->get();
+        ->where('oldsubs.email', '=', $member->email)
+        ->get();
+
         $isActive = DB::table('subscriptions')
         ->where('subscriptions.email', '=', $member->email)
         ->get();
 
-        //dd($isActive[0]);
+        if($subs->isNotEmpty()){
+
+        }else{
+
+        }
+
+        if($subs->last()->to < Carbon::today())
+        {
+            $subToUpdate = DB::table('subscriptions')
+            ->where('subscriptions.email', $member->email)
+            ->update([
+                'active'  => '0',
+                'subexpiry' => null
+            ]);
+
+            $isActive = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', $member->email)
+            ->get();
+        }
 
         return view('employee.this_member', compact('member', 'subs', 'isActive'));
     }
+
 
     public function updateAsEmp(Request $req, $id)
     {
@@ -157,7 +177,9 @@ class UserController extends Controller
             ->update([
                 'all_months' => $sub[0]->all_months + 6,
                 'active'  => '1',
-                'subexpiry' => Carbon::today()->addMonth(6)
+                'subexpiry' => Carbon::today()->addMonth(6),
+                'discounts' => 0,
+                'plus_charge' => 0
             ]);
 
         return redirect('/users');
