@@ -15,13 +15,26 @@ class OldsubController extends Controller
     function showMySubs()
     {
         $oldSubs = DB::table('oldsubs')
-            ->where('oldsubs.email', '=', Auth::user()->email)
-            ->select('from', 'to')
-            ->get();
+        ->where('oldsubs.email', '=', Auth::user()->email)
+        ->select('from', 'to')
+        ->get();
 
         $allSubs = DB::table('subscriptions')
         ->where('subscriptions.email', '=', Auth::user()->email)
         ->get();
+
+        if($oldSubs->last()->to < Carbon::today())
+        {
+            $subToUpdate = DB::table('subscriptions')
+            ->where('subscriptions.email', Auth::user()->email)
+            ->update([
+                'active'  => '0'
+            ]);
+
+            $allSubs = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', Auth::user()->email)
+            ->get();
+        }
 
         return view('member.subscriptions', compact('oldSubs', 'allSubs'));
     }

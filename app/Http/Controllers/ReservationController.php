@@ -131,138 +131,161 @@ class ReservationController extends Controller
     function reserve($id)
     {
         $user = DB::table('users')
-            ->where('users.email', "=", Auth::user()->email)
-            ->get();
-        $current = $user[0]->current;
-        $max = $user[0]->max;
-        $stock = Stock::find($id);
-        $res = new Reservation;
-        $res->date = Carbon::today();
-        $res->expiry = Carbon::tomorrow();
-        $res->email = Auth::user()->email;
-        $res->isbn = $stock->isbn;
-        if ($current < $max) {
-            $res->save();
-            $userToSave = DB::table('users')
-                ->where('users.email', Auth::user()->email)
-                ->update(['current' => $current + 1]);
+        ->where('users.email', "=", Auth::user()->email)
+        ->get();
 
-            $stock->available_number = $stock->available_number - 1;
-            $stock->save();
+        $subs = DB::table('oldsubs')
+        ->where('oldsubs.email', '=', $user[0]->email)
+        ->get();
 
-            $book = Book::find($id);
+        if($subs->last()->to < Carbon::today())
+        {
+            $subToUpdate = DB::table('subscriptions')
+            ->where('subscriptions.email', $user[0]->email)
+            ->update([
+                'active'  => '0',
+                'subexpiry' => null
+            ]);
 
-            $suggest = DB::table('suggestions')
-            ->where('suggestions.email', "=", Auth::user()->email)
-            ->get();
-
-            $category = $book->category;
-            if($category === "LT")
-            {
-                $lifestyle_number = $suggest[0]->lifestyle_number;
-
-                $suggToSave = DB::table('suggestions')
-                    ->where('suggestions.email', Auth::user()->email)
-                    ->update(['lifestyle_number' => $lifestyle_number + 1]);
-            }elseif($category === "F")
-            {
-                $food_number = $suggest[0]->food_number;
-
-                $suggToSave = DB::table('suggestions')
-                    ->where('suggestions.email', Auth::user()->email)
-                    ->update(['food_number' => $food_number + 1]);
-            }elseif($category === "KID")
-            {
-                $kids_number = $suggest[0]->kids_number;
-
-                $suggToSave = DB::table('suggestions')
-                    ->where('suggestions.email', Auth::user()->email)
-                    ->update(['kids_number' => $kids_number + 1]);
-            }elseif($category === "LIT")
-            {
-                $literature_number = $suggest[0]->literature_number;
-
-                $suggToSave = DB::table('suggestions')
-                    ->where('suggestions.email', Auth::user()->email)
-                    ->update(['literature_number' => $literature_number + 1]);
-            }elseif($category === "COM")
-            {
-                $comics_number = $suggest[0]->comics_number;
-
-                $suggToSave = DB::table('suggestions')
-                    ->where('suggestions.email', Auth::user()->email)
-                    ->update(['comics_number' => $comics_number + 1]);
-            }elseif($category === "CLA")
-            {
-                $classics_number = $suggest[0]->classics_number;
-
-                $suggToSave = DB::table('suggestions')
-                    ->where('suggestions.email', Auth::user()->email)
-                    ->update(['classics_number' => $classics_number + 1]);
-            }elseif($category === "ART")
-            {
-                $art_number = $suggest[0]->art_number;
-
-                $suggToSave = DB::table('suggestions')
-                    ->where('suggestions.email', Auth::user()->email)
-                    ->update(['art_number' => $art_number + 1]);
-            }elseif($category === "FIN")
-            {
-                $financial_number = $suggest[0]->financial_number;
-
-                $suggToSave = DB::table('suggestions')
-                    ->where('suggestions.email', Auth::user()->email)
-                    ->update(['financial_number' => $financial_number + 1]);
-            }elseif($category === "S")
-            {
-                $sport_number = $suggest[0]->sport_number;
-
-                $suggToSave = DB::table('suggestions')
-                    ->where('suggestions.email', Auth::user()->email)
-                    ->update(['sport_number' => $sport_number + 1]);
-            }elseif($category === "L")
-            {
-                $learning_number = $suggest[0]->learning_number;
-
-                $suggToSave = DB::table('suggestions')
-                    ->where('suggestions.email', Auth::user()->email)
-                    ->update(['learning_number' => $learning_number + 1]);
-            }elseif($category === "TEC")
-            {
-                $tech_number = $suggest[0]->tech_number;
-
-                $suggToSave = DB::table('suggestions')
-                    ->where('suggestions.email', Auth::user()->email)
-                    ->update(['tech_number' => $tech_number + 1]);
-            }elseif($category === "H")
-            {
-                $history_number = $suggest[0]->history_number;
-
-                $suggToSave = DB::table('suggestions')
-                    ->where('suggestions.email', Auth::user()->email)
-                    ->update(['history_number' => $history_number + 1]);
-            }elseif($category === "TRA")
-            {
-                $travel_number = $suggest[0]->travel_number;
-
-                $suggToSave = DB::table('suggestions')
-                    ->where('suggestions.email', Auth::user()->email)
-                    ->update(['travel_number' => $travel_number + 1]);
-            }elseif($category === "REL")
-            {
-                $religion_number = $suggest[0]->religion_number;
-
-                $suggToSave = DB::table('suggestions')
-                    ->where('suggestions.email', Auth::user()->email)
-                    ->update(['religion_number' => $religion_number + 1]);
-            }
-
-            session(['reservation' => 'Foglalás Sikeres!']);
-            return redirect('/myreservations');
-        }else {
-            session(['reservation' => 'Egyszerre nem foglalhatsz, vagy kölcsönözhetsz több könyvet!']);
+            session(['reservation' => 'Könyvet csak aktív előfizetéssel rendelkezők foglalhatnak!']);
             return redirect('/books-available');
+
+        }else
+        {
+            $current = $user[0]->current;
+            $max = $user[0]->max;
+            $stock = Stock::find($id);
+            $res = new Reservation;
+            $res->date = Carbon::today();
+            $res->expiry = Carbon::tomorrow();
+            $res->email = Auth::user()->email;
+            $res->isbn = $stock->isbn;
+            if ($current < $max) {
+                $res->save();
+                $userToSave = DB::table('users')
+                    ->where('users.email', Auth::user()->email)
+                    ->update(['current' => $current + 1]);
+
+                $stock->available_number = $stock->available_number - 1;
+                $stock->save();
+
+                $book = Book::find($id);
+
+                $suggest = DB::table('suggestions')
+                ->where('suggestions.email', "=", Auth::user()->email)
+                ->get();
+
+                $category = $book->category;
+                if($category === "LT")
+                {
+                    $lifestyle_number = $suggest[0]->lifestyle_number;
+
+                    $suggToSave = DB::table('suggestions')
+                        ->where('suggestions.email', Auth::user()->email)
+                        ->update(['lifestyle_number' => $lifestyle_number + 1]);
+                }elseif($category === "F")
+                {
+                    $food_number = $suggest[0]->food_number;
+
+                    $suggToSave = DB::table('suggestions')
+                        ->where('suggestions.email', Auth::user()->email)
+                        ->update(['food_number' => $food_number + 1]);
+                }elseif($category === "KID")
+                {
+                    $kids_number = $suggest[0]->kids_number;
+
+                    $suggToSave = DB::table('suggestions')
+                        ->where('suggestions.email', Auth::user()->email)
+                        ->update(['kids_number' => $kids_number + 1]);
+                }elseif($category === "LIT")
+                {
+                    $literature_number = $suggest[0]->literature_number;
+
+                    $suggToSave = DB::table('suggestions')
+                        ->where('suggestions.email', Auth::user()->email)
+                        ->update(['literature_number' => $literature_number + 1]);
+                }elseif($category === "COM")
+                {
+                    $comics_number = $suggest[0]->comics_number;
+
+                    $suggToSave = DB::table('suggestions')
+                        ->where('suggestions.email', Auth::user()->email)
+                        ->update(['comics_number' => $comics_number + 1]);
+                }elseif($category === "CLA")
+                {
+                    $classics_number = $suggest[0]->classics_number;
+
+                    $suggToSave = DB::table('suggestions')
+                        ->where('suggestions.email', Auth::user()->email)
+                        ->update(['classics_number' => $classics_number + 1]);
+                }elseif($category === "ART")
+                {
+                    $art_number = $suggest[0]->art_number;
+
+                    $suggToSave = DB::table('suggestions')
+                        ->where('suggestions.email', Auth::user()->email)
+                        ->update(['art_number' => $art_number + 1]);
+                }elseif($category === "FIN")
+                {
+                    $financial_number = $suggest[0]->financial_number;
+
+                    $suggToSave = DB::table('suggestions')
+                        ->where('suggestions.email', Auth::user()->email)
+                        ->update(['financial_number' => $financial_number + 1]);
+                }elseif($category === "S")
+                {
+                    $sport_number = $suggest[0]->sport_number;
+
+                    $suggToSave = DB::table('suggestions')
+                        ->where('suggestions.email', Auth::user()->email)
+                        ->update(['sport_number' => $sport_number + 1]);
+                }elseif($category === "L")
+                {
+                    $learning_number = $suggest[0]->learning_number;
+
+                    $suggToSave = DB::table('suggestions')
+                        ->where('suggestions.email', Auth::user()->email)
+                        ->update(['learning_number' => $learning_number + 1]);
+                }elseif($category === "TEC")
+                {
+                    $tech_number = $suggest[0]->tech_number;
+
+                    $suggToSave = DB::table('suggestions')
+                        ->where('suggestions.email', Auth::user()->email)
+                        ->update(['tech_number' => $tech_number + 1]);
+                }elseif($category === "H")
+                {
+                    $history_number = $suggest[0]->history_number;
+
+                    $suggToSave = DB::table('suggestions')
+                        ->where('suggestions.email', Auth::user()->email)
+                        ->update(['history_number' => $history_number + 1]);
+                }elseif($category === "TRA")
+                {
+                    $travel_number = $suggest[0]->travel_number;
+
+                    $suggToSave = DB::table('suggestions')
+                        ->where('suggestions.email', Auth::user()->email)
+                        ->update(['travel_number' => $travel_number + 1]);
+                }elseif($category === "REL")
+                {
+                    $religion_number = $suggest[0]->religion_number;
+
+                    $suggToSave = DB::table('suggestions')
+                        ->where('suggestions.email', Auth::user()->email)
+                        ->update(['religion_number' => $religion_number + 1]);
+                }
+
+                session(['reservation' => 'Foglalás Sikeres!']);
+                return redirect('/myreservations');
+            }else {
+                session(['reservation' => 'Egyszerre nem foglalhatsz, vagy kölcsönözhetsz több könyvet!']);
+                return redirect('/books-available');
+            }
         }
+
+
+
 
     }
 
