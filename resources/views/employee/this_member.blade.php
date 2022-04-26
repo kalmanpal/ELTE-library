@@ -14,7 +14,7 @@
                 <div class="card-header">{{ $member->name }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('update-member-data/'.$member->id) }}">
+                    <form method="POST" action="{{ url('update-member-data/'.$member->id) }}" id="mentes-form">
                         @method('PUT')
                         @csrf
 
@@ -93,28 +93,39 @@
                             </div>
                         </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <input type="submit" value="Mentés" class="btn btn-primary">
-                            </div>
-                        </div>
                     </form>
 
-                    @if ($isActive[0]->active === 0)
-                        <form method="GET" action="/activate/{{$member->id}}">
-                            @csrf
+                    <form method="GET" action="/activate/{{$member->id}}" id="hiteles-form">
+                        @csrf
+
+                    </form>
+
+                    <div class="asd">
+                        <div class="row mb-0">
+                            <div class="">
+                                <input form="mentes-form" type="submit" value="Mentés" class="btn btn-primary">
+                            </div>
+                        </div>
+
+                        @if ($isActive[0]->active === 0)
                             <div class="row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <input type="submit" value="Adatok hitelesek, előfizetés indítása" class="btn btn-success">
+                                <div class="">
+                                    <input form="hiteles-form" type="submit" value="Adatok hitelesek, előfizetés indítása, esetleges tartozás" class="btn btn-success">
                                 </div>
                             </div>
-                        </form>
-                    @endif
+                        @endif
+                    </div>
 
                     <p></p>
 
                     @if ($isActive[0]->all_months != 0)
                         <h5>Előfizetések</h5>
+
+                        <div class="sub-container">
+                            <p>Tartozás: {{$isActive[0]->plus_charge}} Ft</p>
+                            <p>Kedvezmények: {{$isActive[0]->discounts}}%</p>
+                        </div>
+
                         <table class="table">
                             <tbody>
                                 <th>

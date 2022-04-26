@@ -74,4 +74,37 @@
     margin: 0 0;
 }
 
+/*--*/
+
+.asd{
+    display: flex;
+    justify-content: center;
+    grid-gap: 50px;
+}
+
+.sub-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.paginate-container{
+    display: flex;
+    justify-content: center;
+}
+
+.cb-register{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.cb-size{
+    width: 20px;
+    height: 20px;
+}
+
+.cb-text{
+    font-size: 15px;
+}
 
