@@ -124,6 +124,11 @@
                             </div>
                         </div>
 
+                        <div class="cb-register mb-2">
+                            <input class="cb-size" type="checkbox" id="vehicle1" name="vehicle1" value="Bike" required>
+                            <label class="cb-text" for="vehicle1">Elismerem, hogy a megadott adatok megfelelnek a valóságnak.</label><br>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 {{-- <input value="submit" type="submit" class="btn btn-primary">
