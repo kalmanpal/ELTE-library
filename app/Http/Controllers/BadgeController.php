@@ -21,18 +21,57 @@ class BadgeController extends Controller
         $allRentsNumber = $allRentals->count();
 
         if(($allRentsNumber >= 5)&($dataToUpdate[0]->five != 1)){
-            $dataToUpdate[0]->five = 1;
-            $dataToUpdate[0]->save();
+            $badgeToUpdate = DB::table('badges')
+            ->where('badges.email', Auth::user()->email)
+            ->update([
+                'five' => '1'
+            ]);
+
+            $sub = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', Auth::user()->email)
+            ->get();
+
+            $subToUpdate = DB::table('subscriptions')
+            ->where('subscriptions.email', Auth::user()->email)
+            ->update([
+                'discounts' => $sub[0]->discounts + 5
+            ]);
         }
 
         if(($allRentsNumber >= 10)&($dataToUpdate[0]->ten != 1)){
-            $dataToUpdate[0]->ten = 1;
-            $dataToUpdate[0]->save();
+            $badgeToUpdate = DB::table('badges')
+            ->where('badges.email', Auth::user()->email)
+            ->update([
+                'ten' => '1'
+            ]);
+
+            $sub = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', Auth::user()->email)
+            ->get();
+
+            $subToUpdate = DB::table('subscriptions')
+            ->where('subscriptions.email', Auth::user()->email)
+            ->update([
+                'discounts' => $sub[0]->discounts + 10
+            ]);
         }
 
         if(($allRentsNumber >= 20)&($dataToUpdate[0]->twenty != 1)){
-            $dataToUpdate[0]->twenty = 1;
-            $dataToUpdate[0]->save();
+            $badgeToUpdate = DB::table('badges')
+            ->where('badges.email', Auth::user()->email)
+            ->update([
+                'twenty' => '1'
+            ]);
+
+            $sub = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', Auth::user()->email)
+            ->get();
+
+            $subToUpdate = DB::table('subscriptions')
+            ->where('subscriptions.email', Auth::user()->email)
+            ->update([
+                'discounts' => $sub[0]->discounts + 20
+            ]);
         }
 
         $onTimeRentals = DB::table('rentals')
@@ -49,19 +88,49 @@ class BadgeController extends Controller
         }
 
         if(($onTimeNumber >= 10)&($dataToUpdate[0]->ontime != 1)){
-            $dataToUpdate[0]->ontime = 1;
-            $dataToUpdate[0]->save();
+            $badgeToUpdate = DB::table('badges')
+            ->where('badges.email', Auth::user()->email)
+            ->update([
+                'ontime' => '1'
+            ]);
+
+            $sub = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', Auth::user()->email)
+            ->get();
+
+            $subToUpdate = DB::table('subscriptions')
+            ->where('subscriptions.email', Auth::user()->email)
+            ->update([
+                'discounts' => $sub[0]->discounts + 5
+            ]);
         }
 
-        // $allSubs = DB::table('oldsubs')
-        // ->where('oldsubs.email', '=', Auth::user()->email)
-        // ->get();
-        $allSubsNumber = 0; //$allSubs->count();
+        $allSubs = DB::table('oldsubs')
+        ->where('oldsubs.email', '=', Auth::user()->email)
+        ->get();
+        $allSubsNumber = $allSubs->count();
 
-        // if(($allSubsNumber >= 2)&($dataToUpdate->oneyear != 1)){
-        //     $dataToUpdate->oneyear = 1;
-        //     $dataToUpdate->save();
-        // }
+        //dd($allSubsNumber, $dataToUpdate);
+
+        if(($allSubsNumber >= 2)&($dataToUpdate[0]->oneyear != 1)){
+            $badgeToUpdate = DB::table('badges')
+            ->where('badges.email', Auth::user()->email)
+            ->update([
+                'oneyear' => '1'
+            ]);
+
+            $sub = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', Auth::user()->email)
+            ->get();
+
+            $subToUpdate = DB::table('subscriptions')
+            ->where('subscriptions.email', Auth::user()->email)
+            ->update([
+                'discounts' => $sub[0]->discounts + 10
+            ]);
+        }
+
+
 
         $data = collect([$allRentsNumber, $onTimeNumber, $allSubsNumber]);
 
