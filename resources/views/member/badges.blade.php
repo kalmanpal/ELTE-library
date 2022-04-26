@@ -14,7 +14,7 @@
                                 @if ($data[0] >= 5)
                                     <img src="https://cdn2.iconfinder.com/data/icons/basic-flat-icon-set/128/tick-256.png" style="width: 25px" alt="">
                                 @else
-                                    <img src="https://cdn2.iconfinder.com/data/icons/generic-06/100/Artboard_130-256.png" style="width: 25px" alt="">
+                                    <img src="https://cdn2.iconfinder.com/data/icons/generic-06/100/Artboard_130-256.png" style="width: 25px" alt="" data-toggle="popover" title="5 kölcsönzés" data-trigger="hover focus" data-content="A bronzérem feloldásához érj el 5 kölcsönzést. A jelvény feloldásával 5% kedvezmény érhető el, amit a következő előfizetésnél lehet felhasználni. A kedvezmények összeadódnak.">
                                 @endif
                             </p>
                         </div>
@@ -38,7 +38,7 @@
                                 @if ($data[0] >= 10)
                                     <img src="https://cdn2.iconfinder.com/data/icons/basic-flat-icon-set/128/tick-256.png" style="width: 25px" alt="">
                                 @else
-                                    <img src="https://cdn2.iconfinder.com/data/icons/generic-06/100/Artboard_130-256.png" style="width: 25px" alt="">
+                                <img src="https://cdn2.iconfinder.com/data/icons/generic-06/100/Artboard_130-256.png" style="width: 25px" alt="" data-toggle="popover" title="10 kölcsönzés" data-trigger="hover focus" data-content="Az ezüstérem feloldásához érj el 10 kölcsönzést. A jelvény feloldásával 10% kedvezmény érhető el, amit a következő előfizetésnél lehet felhasználni. A kedvezmények összeadódnak.">
                                 @endif
                             </p>
                         </div>
@@ -62,7 +62,7 @@
                                 @if ($data[0] >= 20)
                                     <img src="https://cdn2.iconfinder.com/data/icons/basic-flat-icon-set/128/tick-256.png" style="width: 25px" alt="">
                                 @else
-                                    <img src="https://cdn2.iconfinder.com/data/icons/generic-06/100/Artboard_130-256.png" style="width: 25px" alt="">
+                                <img src="https://cdn2.iconfinder.com/data/icons/generic-06/100/Artboard_130-256.png" style="width: 25px" alt="" data-toggle="popover" title="20 kölcsönzés" data-trigger="hover focus" data-content="Az aranyérem feloldásához érj el 20 kölcsönzést. A jelvény feloldásával 20% kedvezmény érhető el, amit a következő előfizetésnél lehet felhasználni. A kedvezmények összeadódnak.">
                                 @endif
                             </p>
                         </div>
@@ -86,7 +86,7 @@
                                 @if ($data[1] >= 10)
                                     <img src="https://cdn2.iconfinder.com/data/icons/basic-flat-icon-set/128/tick-256.png" style="width: 25px" alt="">
                                 @else
-                                    <img src="https://cdn2.iconfinder.com/data/icons/generic-06/100/Artboard_130-256.png" style="width: 25px" alt="">
+                                <img src="https://cdn2.iconfinder.com/data/icons/generic-06/100/Artboard_130-256.png" style="width: 25px" alt="" data-toggle="popover" title="Nincs késés!" data-trigger="hover focus" data-content="A jelvény feloldáshoz érj el 10 késés nélkül visszahozott kölcsönzést. A jelvény feloldásával 5% kedvezmény érhető el, amit a következő előfizetésnél lehet felhasználni. A kedvezmények összeadódnak.">
                                 @endif
                             </p>
                         </div>
@@ -110,7 +110,7 @@
                                 @if ($data[2] >= 2)
                                     <img src="https://cdn2.iconfinder.com/data/icons/basic-flat-icon-set/128/tick-256.png" style="width: 25px" alt="">
                                 @else
-                                    <img src="https://cdn2.iconfinder.com/data/icons/generic-06/100/Artboard_130-256.png" style="width: 25px" alt="">
+                                <img src="https://cdn2.iconfinder.com/data/icons/generic-06/100/Artboard_130-256.png" style="width: 25px" alt="" data-toggle="popover" title="Évforduló" data-trigger="hover focus" data-content="A jelvény feloldáshoz fizess elő 2 félévre. A jelvény feloldásával 10% kedvezmény érhető el, amit a következő előfizetésnél lehet felhasználni. A kedvezmények összeadódnak.">
                                 @endif
                             </p>
                         </div>
@@ -134,15 +134,17 @@
     </div>
 </div>
 
-{{-- <script>
-    var progressBar1 = $('.progress');
-    var progressNumber1 =  50;
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 
-    progressBar1.css('width', progressNumber1 + '%');
-    progressBar1.attr('aria-valuenow', progressNumber1);
-
-</script> --}}
-
+<script>
+    var popoverTriggerList = [].slice.call( document.querySelectorAll( '[data-toggle="popover"]' ) );
+    var popoverList = popoverTriggerList.map( function( popoverTrigger )
+    {
+        return new bootstrap.Popover( popoverTrigger );
+    } );
+</script>
 
 
 
