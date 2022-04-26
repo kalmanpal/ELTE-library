@@ -1,11 +1,19 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="container">
+<div class="container mb-4">
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">Könyvek</div>
+                <div class="card-header">
+                    Könyvek
+
+                    {{-- <form method="GET" action="search-results" >
+                        @csrf
+                        <input type="text" class="form-control form-control-sm" name="title" required>
+                        <button type="submit" class="btn btn-primary btn-sm">Keresés</button>
+                    </form> --}}
+                </div>
                 <div class="card-body">
 
                     {{-- <table class="table">
@@ -58,7 +66,7 @@
                             @foreach ($books as $item)
                                 <a class="no-underline" href="{{ url('edit-book/'.$item->id) }}">
                                     <div class="card" style="width: 15rem;">
-                                        <img class="book-image" src="https://s04.static.libri.hu/cover/f0/3/1243841_5.jpg" class="card-img-top" alt="...">
+                                        <img class="card-img-top book-image" src="{{ asset($item->picture) }}" alt="">
                                         <div class="card-body" style="height: 195px">
                                             <h5 class="card-title">{{ $item->title }}</h5>
                                             <p class="card-text card-remove-gap">{{ $item->isbn }}</p>
@@ -73,11 +81,14 @@
                         </div>
                 </div>
             </div>
-            {{$books->links()}}
         </div>
     </div>
-
 </div>
+
+<div class="paginate-container">
+    {{$books->links()}}
+</div>
+
 <?php
     if(session()->has('newBook')){
         echo "<script>alert('".session('newBook')."');</script>";

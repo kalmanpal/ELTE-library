@@ -55,7 +55,7 @@ class BookController extends Controller
     {
         $data = DB::table('books')->join('stocks', 'books.isbn', "=", 'stocks.isbn')
         ->orderBy('title', 'asc')
-        ->paginate(4);
+        ->paginate(1);
 
         return view('employee/books', ['books' => $data]);
     }
