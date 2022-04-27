@@ -8,49 +8,51 @@
                 <div class="card-header">Foglalásaim</div>
                 <div class="card-body">
 
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Cím</th>
-                            <th scope="col">ISBN</th>
-                            <th scope="col">Író</th>
-                            <th scope="col">Kiadás éve</th>
-                            <th scope="col">Kiadás</th>
-                            <th></th>
-                          </tr>
-                        </thead>
+                    @if ($myreservations->isEmpty())
+                        <div>Jelenleg nincsenek foglalásaid.</div>
+                    @else
 
-                        <tbody>
-                            @foreach ($myreservations as $item)
-                                <tr id="{{ $item->id }}" href>
-                                    <td>
-                                        <img src="{{ asset('storage/app/pictures/'.$item->picture) }}" class="w-10">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Cím</th>
+                                <th scope="col">ISBN</th>
+                                <th scope="col">Író</th>
+                                <th scope="col">Kiadás éve</th>
+                                <th scope="col">Kiadás</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach ($myreservations as $item)
+                                    <tr id="{{ $item->id }}" href>
+                                        <td>
+                                            <img src="{{ asset('storage/app/pictures/'.$item->picture) }}" class="w-10">
+                                            </td>
+                                        <td class="myRes">
+                                            {{ $item->title }}
                                         </td>
-                                    <td class="myRes">
-                                        {{ $item->title }}
-                                    </td>
-                                    <td class="myRes">
-                                        {{ $item->isbn }}
-                                    </td>
-                                    <td class="myRes">
-                                        {{ $item->writer }}
-                                    </td>
-                                    <td class="myRes">
-                                        {{ $item->release }}
-                                    </td>
-                                    <td class="myRes">
-                                        {{ $item->edition }}
-                                    </td>
-                                    <td>
-                                        <a href="/deleteReservation/{{ $item->id }}"><button class="btn btn-primary">Foglalás törlése</button></a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-
-
-
+                                        <td class="myRes">
+                                            {{ $item->isbn }}
+                                        </td>
+                                        <td class="myRes">
+                                            {{ $item->writer }}
+                                        </td>
+                                        <td class="myRes">
+                                            {{ $item->release }}
+                                        </td>
+                                        <td class="myRes">
+                                            {{ $item->edition }}
+                                        </td>
+                                        <td>
+                                            <a href="/deleteReservation/{{ $item->id }}"><button class="btn btn-primary">Foglalás törlése</button></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                    @endif
                 </div>
             </div>
         </div>
