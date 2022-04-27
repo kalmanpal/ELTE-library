@@ -16,27 +16,35 @@ class OldsubController extends Controller
     {
         $oldSubs = DB::table('oldsubs')
         ->where('oldsubs.email', '=', Auth::user()->email)
-        ->select('from', 'to')
+        ->orderBy('to', 'asc')
         ->get();
 
         $allSubs = DB::table('subscriptions')
         ->where('subscriptions.email', '=', Auth::user()->email)
         ->get();
 
-        if($oldSubs->last()->to < Carbon::today())
-        {
-            $subToUpdate = DB::table('subscriptions')
-            ->where('subscriptions.email', Auth::user()->email)
-            ->update([
-                'active'  => '0'
-            ]);
 
-            $allSubs = DB::table('subscriptions')
-            ->where('subscriptions.email', '=', Auth::user()->email)
-            ->get();
+        if($oldSubs->isEmpty())
+        {
+            return view('member.subscriptions', compact('oldSubs', 'allSubs'));
+        }else
+        {
+            if(($oldSubs->last()->to < Carbon::today()) && ($allSubs[0]->active != 0))
+            {
+                $subToUpdate = DB::table('subscriptions')
+                ->where('subscriptions.email', Auth::user()->email)
+                ->update([
+                    'active'  => '0'
+                ]);
+
+                $allSubs = DB::table('subscriptions')
+                ->where('subscriptions.email', '=', Auth::user()->email)
+                ->get();
+            }
+
+            return view('member.subscriptions', compact('oldSubs', 'allSubs'));
         }
 
-        return view('member.subscriptions', compact('oldSubs', 'allSubs'));
     }
 
 }
