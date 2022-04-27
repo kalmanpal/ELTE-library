@@ -181,6 +181,7 @@ class UserController extends Controller
                 'plus_charge' => 0
             ]);
 
+        session(['subActivated' => 'Az előfizetés aktiválva!']);
         return redirect('/users');
     }
 

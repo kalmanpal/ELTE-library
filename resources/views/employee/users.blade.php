@@ -45,5 +45,10 @@
         echo "<script>alert('".session('newUser')."');</script>";
         session()->forget('newUser');
     }
+
+    if(session()->has('subActivated')){
+        echo "<script>alert('".session('subActivated')."');</script>";
+        session()->forget('subActivated');
+    }
 ?>
 @endsection
