@@ -51,33 +51,32 @@ class UserController extends Controller
         $member = User::find($id);
         $subs = DB::table('oldsubs')
         ->where('oldsubs.email', '=', $member->email)
+        ->orderBy('to', 'asc')
         ->get();
 
         $isActive = DB::table('subscriptions')
         ->where('subscriptions.email', '=', $member->email)
         ->get();
 
-        if($subs->isNotEmpty()){
-
-        }else{
-
-        }
-
-        if($subs->last()->to < Carbon::today())
+        if($subs->isEmpty())
         {
-            $subToUpdate = DB::table('subscriptions')
-            ->where('subscriptions.email', $member->email)
-            ->update([
-                'active'  => '0',
-                'subexpiry' => null
-            ]);
+            return view('employee.this_member', compact('member', 'subs', 'isActive'));
+        }else
+        {
+            if(($subs->last()->to < Carbon::today()) && ($isActive[0]->active != 0))
+            {
+                $subToUpdate = DB::table('subscriptions')
+                ->where('subscriptions.email', $member->email)
+                ->update([
+                    'active'  => '0'
+                ]);
 
-            $isActive = DB::table('subscriptions')
-            ->where('subscriptions.email', '=', $member->email)
-            ->get();
+                $isActive = DB::table('subscriptions')
+                ->where('subscriptions.email', '=', $member->email)
+                ->get();
+            }
+            return view('employee.this_member', compact('member', 'subs', 'isActive'));
         }
-
-        return view('employee.this_member', compact('member', 'subs', 'isActive'));
     }
 
 
