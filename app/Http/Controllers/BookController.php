@@ -42,12 +42,13 @@ class BookController extends Controller
             'release' => $req->release,
         ];
 
-        // foreach($sendTo as $i)
-        // {
-        //     Mail::to($i->email)->send(new NbEmail($data));
-        // }
-
-        Mail::to('eltekonyvtar2022@gmail.com')->send(new NbEmail($data));
+        if( $req->has('send_email') ){
+            // foreach($sendTo as $i)
+            // {
+            //     Mail::to($i->email)->send(new NbEmail($data));
+            // }
+            Mail::to('eltekonyvtar2022@gmail.com')->send(new NbEmail($data));
+        }
 
         $book = new Book;
         $book->isbn = $req->isbn;

@@ -98,6 +98,11 @@
                             </div>
                         </div>
 
+                        <div class="cb-register mb-2">
+                            <input class="cb-size" type="checkbox" id="" name="send_email" value="send_email">
+                            <label class="cb-text" for="send_email">Értesítő email küldése a könyv érkezéséről.</label><br>
+                        </div>
+
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
