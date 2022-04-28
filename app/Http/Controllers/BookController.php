@@ -7,6 +7,8 @@ use Laravel\Ui\Presets\React;
 use App\Models\Book;
 use App\Models\Stock;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NbEmail;
 
 class BookController extends Controller
 {
@@ -27,6 +29,25 @@ class BookController extends Controller
             session(['newBookFailed' => 'Ezzel az ISBN számmal már létezik egy könyv a rendszerben!']);
             return redirect('/newbook');
         }
+
+        $sendTo = DB::table('users')
+        ->where('type', '=', 'ES')
+        ->orwhere('type', '=', 'ET')
+        ->orwhere('type', '=', 'O')
+        ->get();
+
+        $data = [
+            'title' => $req->title,
+            'author' => $req->writer,
+            'release' => $req->release,
+        ];
+
+        // foreach($sendTo as $i)
+        // {
+        //     Mail::to($i->email)->send(new NbEmail($data));
+        // }
+
+        Mail::to('eltekonyvtar2022@gmail.com')->send(new NbEmail($data));
 
         $book = new Book;
         $book->isbn = $req->isbn;
