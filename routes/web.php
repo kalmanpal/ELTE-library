@@ -99,8 +99,7 @@ Route::group(['middleware' => ['comPages']], function(){
 
 
 
-
-
+Route::get('/emp-search-users-results',[UserController::class,'searchUsers']);
 
 
 

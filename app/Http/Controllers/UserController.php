@@ -185,4 +185,16 @@ class UserController extends Controller
         return redirect('/users');
     }
 
+    public function searchUsers()
+    {
+        $search_text = $_GET['emp-users-query'];
+        $usersSearched= DB::table('users')
+        ->where('name', 'LIKE', '%'.$search_text.'%')
+        ->where('type', '!=', 'E')
+        ->orderBy('name', 'asc')
+        ->get();
+
+        return view('employee.user_results', compact('usersSearched'));
+    }
+
 }
