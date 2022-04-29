@@ -5,7 +5,15 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">Elérhető könyvek</div>
+                <div class="card-header">
+                    Elérhető könyvek
+                    <form type="get" method="GET" action="{{ url('/mem-search-books-results') }}" >
+                        @csrf
+                        <input class="form-control form-control-sm"  type="search"  name="mem-book-query" placeholder="Itt kereshet..." required>
+                        <button type="submit" class="btn btn-primary btn-sm">Keresés</button>
+                    </form>
+
+                </div>
                 <div class="card-body">
 
                     {{-- <table class="table">

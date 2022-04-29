@@ -77,7 +77,7 @@ class BookController extends Controller
     {
         $data = DB::table('books')->join('stocks', 'books.isbn', "=", 'stocks.isbn')
         ->orderBy('title', 'asc')
-        ->paginate(1);
+        ->paginate(2);
 
         return view('employee/books', ['books' => $data]);
     }
@@ -120,5 +120,29 @@ class BookController extends Controller
         return view('member/books', ['books' => $data]);
     }
 
+    public function searchBooksByEmp()
+    {
+        $search_text = $_GET['emp-book-query'];;
+
+        $booksSearchedByEmp = DB::table('books')->join('stocks', 'books.isbn', "=", 'stocks.isbn')
+        ->where('title', 'LIKE', '%'.$search_text.'%')
+        ->orderBy('title', 'asc')
+        ->paginate(1);
+
+        return view('employee.book_results', compact('booksSearchedByEmp'));
+    }
+
+    public function searchBooksByMem()
+    {
+        $search_text = $_GET['mem-book-query'];
+
+        $booksSearchedByMem = DB::table('stocks')->join('books', 'stocks.isbn', "=", 'books.isbn')
+        ->where('title', 'LIKE', '%'.$search_text.'%')
+        ->where('stocks.available_number', '>', 0)
+        ->orderBy('title', 'asc')
+        ->paginate(4);
+
+        return view('member.book_results', compact('booksSearchedByMem'));
+    }
 
 }

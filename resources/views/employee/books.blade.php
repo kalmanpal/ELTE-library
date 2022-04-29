@@ -8,11 +8,12 @@
                 <div class="card-header">
                     Könyvek
 
-                    {{-- <form method="GET" action="search-results" >
+                    <form type="get" method="GET" action="{{ url('/emp-search-books-results') }}" >
                         @csrf
-                        <input type="text" class="form-control form-control-sm" name="title" required>
+                        <input class="form-control form-control-sm"  type="search"  name="emp-book-query" placeholder="Itt kereshet..." required>
                         <button type="submit" class="btn btn-primary btn-sm">Keresés</button>
-                    </form> --}}
+                    </form>
+
                 </div>
                 <div class="card-body">
 

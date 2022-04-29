@@ -42,6 +42,7 @@ Route::group(['middleware' => ['empPages']], function(){
     Route::get('/books',[BookController::class,'showBooks']);
     Route::get('/edit-book/{id}',[BookController::class,'edit']);
     Route::put('/update-book/{id}',[BookController::class,'update']);
+    Route::get('/emp-search-books-results',[BookController::class,'searchBooksByEmp']);
 
     Route::get('/users',[UserController::class,'showUsers']);
     Route::get('/member/{id}',[UserController::class,'index']);
@@ -69,10 +70,14 @@ Route::group(['middleware' => ['memPages']], function(){
 
     Route::get('/books-available',[BookController::class,'showAvailableBooks']);
     Route::get('/book/{id}',[ReservationController::class,'showBook']);
+    Route::get('/mem-search-books-results',[BookController::class,'searchBooksByMem']);
+
     Route::get('/reserveBook/{id}',[ReservationController::class,'reserve']);
     Route::get('/myreservations',[ReservationController::class,'showMyReservations']);
     Route::get('/deleteReservation/{id}',[ReservationController::class,'delete']);
     Route::get('/myrentals',[RentalController::class,'showMyRentals']);
+
+    Route::get('/subscriptions',[OldsubController::class,'showMySubs']);
 
     Route::get('/suggestions',[SuggestionController::class,'makeSuggestions']);
 
@@ -92,7 +97,9 @@ Route::group(['middleware' => ['comPages']], function(){
 
 //--------------------------------------------------NOT FINISHED------------------------------------------------------
 
-Route::get('/subscriptions',[OldsubController::class,'showMySubs']);
+
+
+
 
 
 
