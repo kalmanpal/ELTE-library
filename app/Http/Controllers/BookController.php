@@ -59,7 +59,13 @@ class BookController extends Controller
         $book->edition = $req->edition;
         $book->category = $req->category;
         $book->description = $req->description;
-        $book->picture = $req->file('picture')->store('pictures');
+
+        $destination_path = 'public/pictures';
+        $image = $req->file('picture');
+        $image_name = $image->getClientOriginalName();
+        $path = $req->file('picture')->storeAs($destination_path, $image_name);
+
+        $book->picture = $image_name;
         $book->save();
 
         $stock = new Stock;

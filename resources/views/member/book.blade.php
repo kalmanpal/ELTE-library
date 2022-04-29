@@ -12,7 +12,7 @@
 
                             <div class="row">
                               <div class="col-7">
-                                <img src="{{ asset('storage/app/pictures/'.$books->picture) }}">
+                                <img src="{{ asset('/storage/pictures/'.$books->picture) }}">
                               </div>
                               <div class="col-5">
                                 <label for="ISBN" class="pb-2">ISBN : {{ $books->isbn }}</label><br>
