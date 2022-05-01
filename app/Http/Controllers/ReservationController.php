@@ -284,9 +284,6 @@ class ReservationController extends Controller
             }
         }
 
-
-
-
     }
 
     function showMyReservations()
