@@ -26,6 +26,8 @@ class Kernel extends ConsoleKernel
 
         })->dailyAt('00:00')->timezone('Europe/Budapest');
 
+
+
         $schedule->call(function () {// checks if any reservations are expired
 
             $expiredReservations = DB::table('reservations')
@@ -72,6 +74,35 @@ class Kernel extends ConsoleKernel
             ->delete();
 
         })->dailyAt('00:00')->timezone('Europe/Budapest');
+
+
+
+        $schedule->call(function () {// checks if any rentals are late + add daily fee
+
+            $lateRents = DB::table('rentals')
+            ->whereNull('rentals.in_date')
+            ->where('rentals.deadline', '<', Carbon::today())
+            ->get();
+
+            $numberOfUsers = $lateRents->countBy('email');
+            $userList = $numberOfUsers->keys();
+
+            $dailyFee = 40;
+
+            for($i = 0; $i<$userList->count(); $i++)
+            {
+                $dailyFeeSum = $numberOfUsers->get($userList[$i])*$dailyFee;
+
+                $sub = DB::table('subscriptions')
+                ->where('subscriptions.email', '=', $userList[$i])
+                ->get();
+
+                $subToUpdate = DB::table('subscriptions')
+                ->where('subscriptions.email', '=', $userList[$i])
+                ->update(['subscriptions.plus_charge' => $sub[0]->plus_charge + $dailyFeeSum]);
+            }
+
+        })->everyMinute();
 
     }
 
