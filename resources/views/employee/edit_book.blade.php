@@ -2,6 +2,8 @@
 
 @section('content')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -23,42 +25,42 @@
                         <div class="row mb-3">
                             <label for="title" class="col-md-4 col-form-label text-md-end">Cím</label>
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="title" value="{{ $books->title }}" required>
+                                <input id="title" type="text" class="form-control" name="title" value="{{ $books->title }}" required maxlength="50">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label for="writer" class="col-md-4 col-form-label text-md-end">Író</label>
                             <div class="col-md-6">
-                                <input id="writer" type="text" class="form-control" name="writer" value="{{ $books->writer }}" required>
+                                <input id="onlyLettersWriter" type="text" class="form-control" name="writer" value="{{ $books->writer }}" require maxlength="60">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label for="publisher" class="col-md-4 col-form-label text-md-end">Kiadó</label>
                             <div class="col-md-6">
-                                <input id="publisher" type="text" class="form-control" name="publisher" value="{{ $books->publisher }}" required>
+                                <input id="publisher" type="text" class="form-control" name="publisher" value="{{ $books->publisher }}" required maxlength="30">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label for="release" class="col-md-4 col-form-label text-md-end">Kiadás éve</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="release" id="release" value="{{ $books->release }}" required>
+                                <input type="text" class="form-control" name="release" value="{{ $books->release }}" id="onlyNumbersRelease" required minlength="4" maxlength="4">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label for="edition" class="col-md-4 col-form-label text-md-end">Kiadás</label>
                             <div class="col-md-6">
-                                <input id="edition" type="text" class="form-control" name="edition" value="{{ $books->edition }}" required>
+                                <input id="edition" type="text" class="form-control" name="edition" value="{{ $books->edition }}" required minlength="2" maxlength="15">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label for="description" class="col-md-4 col-form-label text-md-end">Leírás</label>
                             <div class="col-md-6">
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="description" required>{{ $books->description }}</textarea>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" name="description" required maxlength="1000">{{ $books->description }}</textarea>
                             </div>
                         </div>
 
@@ -76,7 +78,7 @@
                         <div class="row mb-3">
                             <label for="max_number" class="col-md-4 col-form-label text-md-end">Könyvek száma</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="max_number" value="{{ $stocks->max_number }}" required>
+                                <input type="text" class="form-control" name="max_number" value="{{ $stocks->max_number }}" required id="onlyNumbersStock" minlength="1" maxlength="3">
                             </div>
                         </div>
 
@@ -111,5 +113,47 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(function() {
+        $('#onlyLettersWriter').keydown(function (e) {
+            if ( e.ctrlKey || e.altKey) {
+                e.preventDefault();
+            } else {
+                var key = e.keyCode;
+                if (((key >=48) && (key <=57)) ||  (key == 190) || ((key >=96) && (key <=111))) {
+                    e.preventDefault();
+                }
+            }
+        });
+    });
+
+    $(function() {
+        $('#onlyNumbersRelease').keydown(function (f) {
+            if (f.ctrlKey || f.altKey || f.shiftKey) {
+                f.preventDefault();
+            } else {
+                var key = f.keyCode;
+                if ( !((key >= 48) && (key <=57)) && !((key >= 96) && (key <=105)) && !((key >= 37) && (key <=40)) && !(key == 8)) {
+                    f.preventDefault();
+                }
+            }
+        });
+    });
+
+    $(function() {
+        $('#onlyNumbersStock').keydown(function (h) {
+            if (h.ctrlKey || h.altKey || h.shiftKey) {
+                h.preventDefault();
+            } else {
+                var key = h.keyCode;
+                if ( !((key >= 48) && (key <=57)) && !((key >= 96) && (key <=105)) && !((key >= 37) && (key <=40)) && !(key == 8)) {
+                    h.preventDefault();
+                }
+            }
+        });
+    });
+
+</script>
 
 @endsection

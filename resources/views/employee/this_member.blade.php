@@ -2,6 +2,9 @@
 <?php
     use Carbon\Carbon;
 ?>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 <head>
     <title>Profil</title>
 </head>
@@ -22,7 +25,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">Név</label>
 
                             <div class="col-md-6">
-                                <input class="form-control" name="name" value="{{ $member->name }}" required>
+                                <input class="form-control" name="name" value="{{ $member->name }}" required minlength="3" maxlength="35"  autofocus id="onlyLettersName">
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -52,7 +55,7 @@
                             <label for="city" class="col-md-4 col-form-label text-md-end">Település</label>
 
                             <div class="col-md-6">
-                                <input class="form-control " name="city" value="{{ $member->city }}" required>
+                                <input class="form-control " name="city" value="{{ $member->city }}" required minlength="2" maxlength="30" id="onlyLettersCity">
 
                                 @error('city')
                                     <span class="invalid-feedback" role="alert">
@@ -66,7 +69,7 @@
                             <label for="address" class="col-md-4 col-form-label text-md-end">Cím</label>
 
                             <div class="col-md-6">
-                                <input class="form-control" name="address" value="{{ $member->address }}" required>
+                                <input class="form-control" name="address" value="{{ $member->address }}" required minlength="3" maxlength="40">
 
                                 @error('address')
                                     <span class="invalid-feedback" role="alert">
@@ -163,4 +166,33 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(function() {
+        $('#onlyLettersName').keydown(function (e) {
+            if ( e.ctrlKey || e.altKey) {
+                e.preventDefault();
+            } else {
+                var key = e.keyCode;
+                if (((key >=48) && (key <=57)) ||  (key == 190) || ((key >=96) && (key <=111))) {
+                    e.preventDefault();
+                }
+            }
+        });
+    });
+
+    $(function() {
+        $('#onlyLettersCity').keydown(function (f) {
+            if (f.ctrlKey || f.altKey) {
+                f.preventDefault();
+            } else {
+                var key = f.keyCode;
+                if (((key >=48) && (key <=57)) ||  (key == 190) || ((key >=96) && (key <=111))) {
+                    f.preventDefault();
+                }
+            }
+        });
+    });
+</script>
+
 @endsection

@@ -23,7 +23,7 @@ class CreateBooksTable extends Migration
             $table->string('edition');
             $table->string('category');
             $table->integer('rating')->default('0');
-            $table->string('description');
+            $table->text('description');
             $table->string('picture');
             $table->timestamps();
         });
