@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 <head>
     <title>Fiók létrehozása</title>
 </head>
@@ -19,7 +21,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Név') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input  type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" minlength="3" maxlength="35"  autofocus id="onlyLettersName">
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -40,7 +42,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email"  maxlength="40">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -54,7 +56,7 @@
                             <label for="city" class="col-md-4 col-form-label text-md-end">{{ __('Település') }}</label>
 
                             <div class="col-md-6">
-                                <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" autofocus>
+                                <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" autofocus minlength="2" maxlength="30" id="onlyLettersCity">
 
                                 @error('city')
                                     <span class="invalid-feedback" role="alert">
@@ -68,7 +70,7 @@
                             <label for="address" class="col-md-4 col-form-label text-md-end">{{ __('Cím') }}</label>
 
                             <div class="col-md-6">
-                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="" autofocus>
+                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="" autofocus minlength="3" maxlength="40">
 
                                 @error('address')
                                     <span class="invalid-feedback" role="alert">
@@ -106,7 +108,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Jelszó') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" maxlength="30">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -125,8 +127,8 @@
                         </div>
 
                         <div class="cb-register mb-2">
-                            <input class="cb-size" type="checkbox" id="vehicle1" name="vehicle1" value="Bike" required>
-                            <label class="cb-text" for="vehicle1">Elismerem, hogy a megadott adatok megfelelnek a valóságnak.</label><br>
+                            <input class="cb-size" type="checkbox" required>
+                            <label class="cb-text">Elismerem, hogy a megadott adatok megfelelnek a valóságnak.</label><br>
                         </div>
 
                         <div class="row mb-0">
@@ -144,4 +146,33 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(function() {
+        $('#onlyLettersName').keydown(function (e) {
+            if ( e.ctrlKey || e.altKey) {
+                e.preventDefault();
+            } else {
+                var key = e.keyCode;
+                if (((key >=48) && (key <=57)) ||  (key == 190) || ((key >=96) && (key <=111))) {
+                    e.preventDefault();
+                }
+            }
+        });
+    });
+
+    $(function() {
+        $('#onlyLettersCity').keydown(function (f) {
+            if (f.ctrlKey || f.altKey) {
+                f.preventDefault();
+            } else {
+                var key = f.keyCode;
+                if (((key >=48) && (key <=57)) ||  (key == 190) || ((key >=96) && (key <=111))) {
+                    f.preventDefault();
+                }
+            }
+        });
+    });
+</script>
+
 @endsection
