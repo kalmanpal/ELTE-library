@@ -82,6 +82,13 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="max_number" class="col-md-4 col-form-label text-md-end">Ebből elérhető </label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" value="{{ $stocks->available_number }}" readonly>
+                            </div>
+                        </div>
+
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">

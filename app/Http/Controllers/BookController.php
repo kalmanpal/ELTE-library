@@ -101,18 +101,48 @@ class BookController extends Controller
         $books = Book::find($id);
         $stocks = Stock::find($id);
 
-        $books->title = $req->title;
-        $books->writer = $req->writer;
-        $books->publisher = $req->publisher;
-        $books->release = $req->release;
-        $books->edition = $req->edition;
-        $books->description = $req->description;
-        // $books->picture = $req->file('picture')->store('pictures');
-        $books->update();
-        $stocks->max_number = $req->max_number;
-        $stocks->available_number = $req->max_number;
-        $stocks->update();
-        session(['bookUpdate' => 'Az könyv adatok módosítása sikerült!']);
+        if($req->max_number == $stocks->max_number)
+        {
+            $books->title = $req->title;
+            $books->writer = $req->writer;
+            $books->publisher = $req->publisher;
+            $books->release = $req->release;
+            $books->edition = $req->edition;
+            $books->description = $req->description;
+            $books->update();
+            session(['bookUpdate' => 'A könyv adatok módosítása sikerült!']);
+
+        }elseif($req->max_number > $stocks->max_number)
+        {
+            $dif = $req->max_number - $stocks->max_number;
+            $stocks->max_number = $req->max_number;
+            $stocks->available_number = $stocks->available_number + $dif;
+            $stocks->update();
+            session(['bookUpdate' => 'A könyv adatok módosítása sikerült!']);
+
+        }elseif($req->max_number < $stocks->max_number)
+        {
+            if($stocks->max_number == $stocks->available_number)
+            {
+                $stocks->max_number = $req->max_number;
+                $stocks->available_number = $req->max_number;
+                $stocks->update();
+                session(['bookUpdate' => 'A könyv adatok módosítása sikerült!']);
+            }else
+            {
+                $dif = $stocks->max_number - $req->max_number;
+                if($dif <= $stocks->available_number)
+                {
+                    $stocks->max_number = $req->max_number;
+                    $stocks->available_number = $stocks->available_number - $dif;
+                    $stocks->update();
+                    session(['bookUpdate' => 'A könyv adatok módosítása sikerült!']);
+                }else
+                {
+                    session(['bookUpdate' => 'A könyvek számának módosítása nem kivitelezhető!']);
+                }
+            }
+        }
         return redirect('books');
     }
 
