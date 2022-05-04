@@ -37,6 +37,10 @@ class UserController extends Controller
             $user-> name=$req->name;
             $user-> city=$req->city;
             $user-> address=$req->address;
+            if(!empty($req->newPw))
+            {
+                $user->password=bcrypt($req->newPw);
+            }
             $user-> save();
             session(['profileUpdate' => 'Az adatok módosítása sikerült!']);
             return redirect('/profile');

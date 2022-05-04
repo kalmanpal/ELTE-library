@@ -46,6 +46,13 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="password" class="col-md-4 col-form-label text-md-end">Új jelszó <img src="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/visibility-off-240.png" alt="" width="20px" onclick="togglePw()"></label>
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" id="new-pw" name="newPw" minlength="6" maxlength="30">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">Jelszó</label>
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password" required maxlength="30">
@@ -96,6 +103,16 @@
             }
         });
     });
+
+
+    function togglePw() {
+        var x = document.getElementById("new-pw");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
 </script>
 
 @endsection
