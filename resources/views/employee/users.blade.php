@@ -6,14 +6,18 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Felhasználók
-
                     <form type="get" method="GET" action="{{ url('/emp-search-users-results') }}" >
                         @csrf
-                        <input class="form-control form-control-sm"  type="search"  name="emp-users-query" placeholder="Itt kereshet..." required>
-                        <button type="submit" class="btn btn-primary btn-sm">Keresés</button>
+                        <div class="searchbar-container">
+                            <div>
+                                Felhasználók
+                            </div>
+                            <div>
+                                <input class="text-input-area"  type="search"  name="emp-users-query" placeholder="Itt kereshet..." required>
+                                <button type="submit" class="search-button">Keresés</button>
+                            </div>
+                        </div>
                     </form>
-
                 </div>
                 <div class="card-body">
 

@@ -6,11 +6,18 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
-                    Elérhető könyvek
+
                     <form type="get" method="GET" action="{{ url('/mem-search-books-results') }}" >
                         @csrf
-                        <input class="form-control form-control-sm"  type="search"  name="mem-book-query" placeholder="Itt kereshet..." required>
-                        <button type="submit" class="btn btn-primary btn-sm">Keresés</button>
+                        <div class="searchbar-container">
+                            <div>
+                                Elérhető könyvek
+                            </div>
+                            <div>
+                                <input class="text-input-area"  type="search"  name="mem-book-query" placeholder="Itt kereshet..." required>
+                                <button type="submit" class="search-button">Keresés</button>
+                            </div>
+                        </div>
                     </form>
 
                 </div>

@@ -62,6 +62,7 @@ Route::group(['middleware' => ['empPages']], function(){
 
     Route::view('/new-user','employee/new_user');
     Route::get('/add-user', [UserController::class,'addUser']);
+    Route::get('/emp-search-users-results',[UserController::class,'searchUsers']);
 });
 
 //--------------------------------------------------MEMBER----------------------------------------------------------------------
@@ -99,7 +100,11 @@ Route::group(['middleware' => ['comPages']], function(){
 
 
 
-Route::get('/emp-search-users-results',[UserController::class,'searchUsers']);
+
+
+//Route::get('/ratings/{id}/{rating}',[ReservationController::class,'showBook']);
+
+Route::get('/ratings/{id}/{rating}',[BookController::class,'ratingABook'])->name('book.rating');
 
 
 

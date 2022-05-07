@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Ui\Presets\React;
 use App\Models\Book;
 use App\Models\Stock;
+use App\Models\Rental;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NbEmail;
@@ -179,6 +180,15 @@ class BookController extends Controller
         ->paginate(4);
 
         return view('member.book_results', compact('booksSearchedByMem'));
+    }
+
+    public function ratingABook($id, $rating)
+    {
+        $thisRent = Rental::find($id);
+
+
+
+        dd($thisRent);
     }
 
 }

@@ -108,3 +108,23 @@
     font-size: 15px;
 }
 
+.searchbar-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-input-area{
+    border-radius: 8px;
+    padding: 0 5px;
+    border: 1px solid grey;
+}
+
+.text-input-area:focus{
+    outline: none;
+}
+
+.search-button{
+    border-radius: 8px;
+    border: 1px solid grey;
+    height: 26px;
+}
