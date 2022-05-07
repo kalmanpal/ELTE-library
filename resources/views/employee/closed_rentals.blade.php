@@ -37,8 +37,9 @@
                             <td>{{ $item->deadline }}</td>
                             <td>{{ $item->in_date }}</td>
                         </tr>
-                    @endforeach
+                            @endforeach
                         </tbody>
+                    </table>
                 </div>
             </div>
         </div>

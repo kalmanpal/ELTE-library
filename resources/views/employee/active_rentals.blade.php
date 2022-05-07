@@ -41,8 +41,9 @@
                                 <td><a href="book-is-back/{{ $item->id }}"><button class="btn btn-primary btn-sm">Könyv visszavétel</button></a></td>
                             @endif
                         </tr>
-                    @endforeach
+                            @endforeach
                         </tbody>
+                    </table>
                 </div>
             </div>
         </div>

@@ -25,7 +25,7 @@ class UserController extends Controller
         ->where('type', '=', 'ES')
         ->orwhere('type', '=', 'ET')
         ->orwhere('type', '=', 'O')
-        ->get();
+        ->paginate(2);
         return view('employee/users',['users'=>$data]);
     }
 
