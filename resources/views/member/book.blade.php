@@ -4,17 +4,17 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="card">
                 <div class="card-header">{{ $books->title }}</div>
 
                 <div class="card-body">
 
-                            <div class="row">
-                              <div class="col-7">
-                                <img src="{{ asset('/storage/pictures/'.$books->picture) }}">
+                            <div class="book-conent-container mb-3">
+                              <div>
+                                <img class="this-book-image" src="{{ asset('/storage/pictures/'.$books->picture) }}">
                               </div>
-                              <div class="col-5">
+                              <div>
                                 <label for="ISBN" class="pb-2">ISBN : {{ $books->isbn }}</label><br>
                                 <label for="title" class="pb-1 book_class_title">{{ $books->title }}</label><br>
                                 <label for="edition" class="pb-2 book_class_ed">{{ $books->edition }} kiadás</label><br>

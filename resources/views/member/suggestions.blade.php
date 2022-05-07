@@ -40,7 +40,7 @@
                             <a class="no-underline" href="{{ url('book/'.$item->id) }}">
                                 <div class="card" style="width: 15rem;">
                                     <img class="book-image" src="{{ asset('/storage/pictures/'.$item->picture) }}" class="card-img-top" alt="...">
-                                    <div class="card-body" style="height: 150px">
+                                    <div class="card-body" style="height: 190px">
                                         <h5 class="card-title">{{ $item->title }}</h5>
                                         <p class="card-text card-remove-gap">{{ $item->isbn }}</p>
                                         <p class="card-text card-remove-gap">{{ $item->writer }}</p>

@@ -68,7 +68,7 @@
                     <h5 class="modal-title" id="exampleModalLabel">Hogy tetszett a könyv?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="emote-container">
 
                     <a href="{{route('book.rating',['id'=>$szevasz,'rating'=> 1])}}">
                         <img src="https://cdn4.iconfinder.com/data/icons/emojis-flat-pixel-perfect/64/emoji-55-512.png" alt="" width="80px">

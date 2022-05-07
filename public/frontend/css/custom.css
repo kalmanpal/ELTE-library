@@ -128,3 +128,21 @@
     border: 1px solid grey;
     height: 26px;
 }
+
+.this-book-image{
+    height: 450px;
+    object-fit:contain;
+    padding-left: 30px;
+}
+
+.book-conent-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.emote-container{
+    display: flex;
+    justify-content: center;
+    gap: 13px;
+    padding: 10px 0;
+}
