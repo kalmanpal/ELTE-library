@@ -46,10 +46,14 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">Új jelszó <img src="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/visibility-off-240.png" alt="" width="20px" onclick="togglePw()"></label>
-                            <div class="col-md-6">
+                            <label for="password" class="col-md-4 col-form-label text-md-end">Új jelszó</label>
+                            <div class="col-md-5">
                                 <input type="password" class="form-control" id="new-pw" name="newPw" minlength="6" maxlength="30">
                             </div>
+                            <div class="col-md-1 d-flex align-items-center">
+                                <img class="toggle-pw"src="https://cdn2.iconfinder.com/data/icons/lightly-icons/30/visibility-off-240.png" alt="" height=" 30px" onclick="togglePw()">
+                            </div>
+
                         </div>
 
                         <div class="row mb-3">
