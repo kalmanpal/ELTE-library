@@ -71,6 +71,12 @@
                                         <p class="card-text card-remove-gap">{{ $item->isbn }}</p>
                                         <p class="card-text card-remove-gap">{{ $item->writer }}</p>
                                         <p class="card-text card-remove-gap">{{ $item->release }}</p>
+                                        @if ($item->numberofratings === 0)
+                                            <p class="card-text card-remove-gap">-</p>
+                                        @else
+                                            <p class="card-text card-remove-gap">5/{{ $item->sum / $item->numberofratings }}</p>
+                                        @endif
+
                                     </div>
                               </div>
                             </a>

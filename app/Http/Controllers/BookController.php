@@ -185,10 +185,22 @@ class BookController extends Controller
     public function ratingABook($id, $rating)
     {
         $thisRent = Rental::find($id);
+        $thisRent->rating = $rating;
 
+        $books = DB::table('books')
+        ->where('books.isbn', '=', $thisRent->isbn)
+        ->get();
 
+        $booksToUpdate = DB::table('books')
+        ->where('books.isbn', '=', $thisRent->isbn)
+        ->update([
+            'books.sum' => $books[0]->sum + $rating,
+            'books.numberofratings' => $books[0]->numberofratings + 1
+        ]);
 
-        dd($thisRent);
+        $thisRent->update();
+
+        return redirect('/myrentals');
     }
 
 }

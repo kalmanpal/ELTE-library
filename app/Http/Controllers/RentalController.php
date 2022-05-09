@@ -47,10 +47,8 @@ class RentalController extends Controller
             ->join('books', 'stocks.isbn', "=", 'books.isbn')
             ->where('email', '=', Auth::user()->email)
             ->orderBy('in_date', 'desc')
-            ->select('rentals.out_date', 'rentals.isbn', 'rentals.deadline', 'rentals.id', 'title', 'in_date')
+            ->select('rentals.out_date', 'rentals.isbn', 'rentals.deadline', 'rentals.id', 'title', 'in_date', 'rentals.rating')
             ->get();
-
-            //dd($data);
         return view('member/my_rentals', ['rentals' => $data]);
     }
 

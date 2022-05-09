@@ -102,7 +102,7 @@ class Kernel extends ConsoleKernel
                 ->update(['subscriptions.plus_charge' => $sub[0]->plus_charge + $dailyFeeSum]);
             }
 
-        })->everyMinute();
+        })->dailyAt('00:00')->timezone('Europe/Budapest');
 
     }
 

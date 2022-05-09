@@ -9,7 +9,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Kölcsönzéseim</div>
                 <div class="card-body">
@@ -26,19 +26,14 @@
                                     <th scope="col">Kölcsönzés dátuma</th>
                                     <th scope="col">Határidő</th>
                                     <th scope="col">Visszahozva</th>
+                                    <th scope="col">Értékelés</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($rentals as $i=>$item)
                                         <tr id="thisRent">
-                                            @if (isset($item->in_date))
-                                                <td>
-                                                    <a class="td_class" href="" data-bs-toggle="modal" data-bs-target="#exampleModal{{$i}}">{{ $item->title }}</a>
-                                                </td>
-                                            @else
-                                                <td>{{ $item->title }}</td>
-                                            @endif
+                                            <td>{{ $item->title }}</td>
                                             <td>{{ $item->isbn }}</td>
                                             <td>{{ $item->out_date }}</td>
                                             <td>{{ $item->deadline }}</td>
@@ -48,6 +43,15 @@
                                                 <td style="color: red">Még nálad van(KÉSÉS)</td>
                                             @else
                                                 <td style="color: orange">Még nálad van</td>
+                                            @endif
+                                            @if (isset($item->rating))
+                                                <td>5/{{ $item->rating }}</td>
+                                            @elseif ((isset($item->in_date)) && (is_null($item->rating)))
+                                                <td>
+                                                    <a class="td_class" href="" data-bs-toggle="modal" data-bs-target="#exampleModal{{$i}}">Értékelj!</a>
+                                                </td>
+                                            @else
+                                                <td>-</td>
                                             @endif
 
                                         </tr>

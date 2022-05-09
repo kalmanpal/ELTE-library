@@ -22,7 +22,12 @@
                                 <label for="publisher" class="pb-1">Kiadó: {{ $books->publisher }}</label><br>
                                 <label for="release" class="pb-1">{{ $books->release }}</label><br>
                                 <label for="description" class="pb-1">Leírás: {{ $books->description }}</label><br>
-                                <label for="description" class="pt-3 pb-3">Értékelés: {{ $books->rating }}/10</label>
+                                @if ($books->numberofratings === 0)
+                                    <label for="description" class="pt-3 pb-3">Olvasói értékelés: -</label>
+                                @else
+                                    <label for="description" class="pt-3 pb-3">Olvasói értékelés: 5/{{ $books->sum / $books->numberofratings }}  -  ({{$books->numberofratings}} értékelés)</label>
+                                @endif
+
                               </div>
                             </div>
 

@@ -127,7 +127,7 @@ if(session()->has('newBookFailed')){
 <script>
     $(function() {
         $('#onlyLettersWriter').keydown(function (e) {
-            if ( e.ctrlKey || e.altKey) {
+            if (e.altKey) {
                 e.preventDefault();
             } else {
                 var key = e.keyCode;
