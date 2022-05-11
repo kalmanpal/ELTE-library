@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+<head>
+    <title>Könyvek</title>
+</head>
+
 @section('content')
 
 <div class="container">
@@ -6,7 +11,6 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
-
                     <form type="get" method="GET" action="{{ url('/mem-search-books-results') }}" >
                         @csrf
                         <div class="searchbar-container">
@@ -19,48 +23,8 @@
                             </div>
                         </div>
                     </form>
-
                 </div>
                 <div class="card-body">
-
-                    {{-- <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Cím</th>
-                            <th scope="col">ISBN</th>
-                            <th scope="col">Író</th>
-                            <th scope="col">Kiadás éve</th>
-                            <th scope="col">Kiadás</th>
-                          </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach ($books as $item)
-                                <tr id="{{ $item->id }}" href>
-                                    <td>
-                                        <img src="{{ asset('storage/app/pictures/'.$item->picture) }}" class="w-10">
-                                        </td>
-                                    <td>
-                                    <a class="td_class" href="{{ url('book/'.$item->id) }}">{{ $item->title }}</a>
-                                    </td>
-                                    <td>
-                                        {{ $item->isbn }}
-                                    </td>
-                                    <td>
-                                        {{ $item->writer }}
-                                    </td>
-                                    <td>
-                                        {{ $item->release }}
-                                    </td>
-                                    <td>
-                                        {{ $item->edition }}
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody> --}}
-
-
                     <div class="webshop-container">
                         @foreach ($books as $item)
                             <a class="no-underline" href="{{ url('book/'.$item->id) }}">
@@ -74,9 +38,8 @@
                                         @if ($item->numberofratings === 0)
                                             <p class="card-text card-remove-gap">-</p>
                                         @else
-                                            <p class="card-text card-remove-gap">5/{{ $item->sum / $item->numberofratings }}</p>
+                                            <p class="card-text card-remove-gap">Olvasói értékelés: {{ $item->sum / $item->numberofratings }}/5</p>
                                         @endif
-
                                     </div>
                               </div>
                             </a>
@@ -88,6 +51,7 @@
         </div>
     </div>
 </div>
+
 <?php
     if(session()->has('reservation')){
         echo "<script>alert('".session('reservation')."');</script>";

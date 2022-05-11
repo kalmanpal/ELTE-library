@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+<head>
+    <title>Előfizetéseim</title>
+</head>
+
 @section('content')
 
 <?php
@@ -11,7 +16,6 @@
             <div class="card">
                 <div class="card-header">Előfizetéseim</div>
                     <div class="card-body">
-
                         @if ($oldSubs->isEmpty())
                             <div>Még nem voltál előfizető.</div>
                         @else
@@ -42,6 +46,7 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
+                            </table>
                         @endif
                     </div>
                 </div>

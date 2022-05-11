@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+<head>
+    <title>Jelvények</title>
+</head>
+
 @section('content')
 
 <div class="container">
@@ -145,8 +150,6 @@
         return new bootstrap.Popover( popoverTrigger );
     } );
 </script>
-
-
 
 @endsection
 
