@@ -13,14 +13,6 @@ use App\Mail\NbEmail;
 
 class BookController extends Controller
 {
-    //
-
-    // function addBook(Request $req)
-    // {
-    //     return $req->file('picture')->store('pictures');
-    // }
-
-
     function addBook(Request $req)
     {
 
@@ -48,7 +40,7 @@ class BookController extends Controller
             // {
             //     Mail::to($i->email)->send(new NbEmail($data));
             // }
-            Mail::to('eltekonyvtar2022@gmail.com')->send(new NbEmail($data));
+            Mail::to('eltekonyvtar2022@gmail.com')->send(new NbEmail($data)); //prezentáció miatt, hogy működik, egyébként a kikommentelt rész a helyes ide...
         }
 
         $book = new Book;
@@ -79,7 +71,6 @@ class BookController extends Controller
         return redirect('/books');
     }
 
-
     function showBooks()
     {
         $data = DB::table('books')->join('stocks', 'books.isbn', "=", 'stocks.isbn')
@@ -88,7 +79,6 @@ class BookController extends Controller
 
         return view('employee/books', ['books' => $data]);
     }
-
 
     public function edit($id)
     {
@@ -147,7 +137,6 @@ class BookController extends Controller
         return redirect('books');
     }
 
-
     public function showAvailableBooks()
     {
         $data = DB::table('stocks')->join('books', 'stocks.isbn', "=", 'books.isbn')
@@ -202,5 +191,4 @@ class BookController extends Controller
 
         return redirect('/myrentals');
     }
-
 }

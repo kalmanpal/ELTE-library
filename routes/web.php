@@ -78,6 +78,8 @@ Route::group(['middleware' => ['memPages']], function(){
     Route::get('/deleteReservation/{id}',[ReservationController::class,'delete']);
     Route::get('/myrentals',[RentalController::class,'showMyRentals']);
 
+    Route::get('/ratings/{id}/{rating}',[BookController::class,'ratingABook'])->name('book.rating');
+
     Route::get('/subscriptions',[OldsubController::class,'showMySubs']);
 
     Route::get('/suggestions',[SuggestionController::class,'makeSuggestions']);
@@ -97,14 +99,3 @@ Route::group(['middleware' => ['comPages']], function(){
 });
 
 //--------------------------------------------------NOT FINISHED------------------------------------------------------
-
-
-
-
-
-//Route::get('/ratings/{id}/{rating}',[ReservationController::class,'showBook']);
-
-Route::get('/ratings/{id}/{rating}',[BookController::class,'ratingABook'])->name('book.rating');
-
-
-

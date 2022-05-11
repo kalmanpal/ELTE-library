@@ -10,7 +10,6 @@ use Illuminate\Support\Collection;
 
 class SuggestionController extends Controller
 {
-
     function makeSuggestions()
     {
         $data = Suggestion::where('email', Auth::user()->email)->get();
@@ -86,5 +85,4 @@ class SuggestionController extends Controller
 
         return view('member/suggestions', ['books' => $booksToSuggest]);
     }
-
 }

@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class OldsubController extends Controller
 {
-
     function showMySubs()
     {
         $oldSubs = DB::table('oldsubs')
@@ -44,7 +43,5 @@ class OldsubController extends Controller
 
             return view('member.subscriptions', compact('oldSubs', 'allSubs'));
         }
-
     }
-
 }

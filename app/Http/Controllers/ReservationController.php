@@ -13,8 +13,6 @@ use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
-    //
-
     public function showBook($id)
     {
         $books = Book::find($id);
@@ -283,7 +281,6 @@ class ReservationController extends Controller
                 return redirect('/books-available');
             }
         }
-
     }
 
     function showMyReservations()
@@ -339,5 +336,4 @@ class ReservationController extends Controller
             ->get();
         return view('employee/reservations', ['reservations' => $data]);
     }
-
 }

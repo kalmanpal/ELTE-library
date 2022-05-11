@@ -16,8 +16,6 @@ use Carbon\Carbon;
 
 class UserController extends Controller
 {
-    //
-
     function showUsers()
     {
         $data= DB::table('users')
@@ -158,7 +156,6 @@ class UserController extends Controller
             session(['newUser' => 'A regisztráció sikertelen, ezzel az email címmel már van regisztrált felhasználó!']);
             return redirect('/new-user');
         }
-
     }
 
     public function activateSub($id)
@@ -200,5 +197,4 @@ class UserController extends Controller
 
         return view('employee.user_results', compact('usersSearched'));
     }
-
 }

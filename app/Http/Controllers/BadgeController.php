@@ -110,8 +110,6 @@ class BadgeController extends Controller
         ->get();
         $allSubsNumber = $allSubs->count();
 
-        //dd($allSubsNumber, $dataToUpdate);
-
         if(($allSubsNumber >= 2)&($dataToUpdate[0]->oneyear != 1)){
             $badgeToUpdate = DB::table('badges')
             ->where('badges.email', Auth::user()->email)
@@ -130,14 +128,8 @@ class BadgeController extends Controller
             ]);
         }
 
-
-
         $data = collect([$allRentsNumber, $onTimeNumber, $allSubsNumber]);
 
         return view('member/badges', ['data' => $data]);
     }
-
-
-
-
 }

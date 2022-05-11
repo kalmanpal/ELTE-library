@@ -120,7 +120,6 @@ class RentalController extends Controller
         return redirect('/closed-rentals');
     }
 
-
     function rentBook(Request $requested, $id)
     {
         $user = DB::table('users')
@@ -296,10 +295,5 @@ class RentalController extends Controller
             session(['rent' => 'A kölcsönzés sikertelen, nincs a megadott email címmel regisztrált felhasználó!']);
             return redirect('/books');
         }
-
     }
-
-
-
-
 }
