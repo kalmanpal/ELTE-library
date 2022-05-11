@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+<head>
+    <title>Felhasználók</title>
+</head>
+
 @section('content')
 
 <div class="container">
@@ -32,6 +37,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
+                        </table>
                     @endif
                 </div>
             </div>

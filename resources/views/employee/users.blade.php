@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+<head>
+    <title>Felhasználók</title>
+</head>
+
 @section('content')
 
 <div class="container mb-3">
@@ -8,6 +13,7 @@
                 <div class="card-header">
                     <form type="get" method="GET" action="{{ url('/emp-search-users-results') }}" >
                         @csrf
+
                         <div class="searchbar-container">
                             <div>
                                 Felhasználók
@@ -20,7 +26,6 @@
                     </form>
                 </div>
                 <div class="card-body">
-
                     <table class="table">
                         <tbody>
                             @foreach ($users as $item)

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+<head>
+    <title>{{$books->title}}</title>
+</head>
+
 @section('content')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -9,7 +13,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ $books->title }}</div>
-
                 <div class="card-body">
                     <form action="{{ url('update-book/'.$books->id) }}" method="POST" enctype="multipart/form-data">
                         @method('PUT')
@@ -64,17 +67,6 @@
                             </div>
                         </div>
 
-
-                        {{-- @if($books->image)
-                            <img src="{{ asset('storage/app/pictures/'.$books->image) }}" alt="">
-                        @endif
-                        <div class="row mb-3">
-                            <label for="picture" class="col-md-4 col-form-label text-md-end">Fénykép</label>
-                            <div class="col-md-6">
-                                <input class="form-control" id="picture" type="file" name="picture">
-                            </div>
-                        </div> --}}
-
                         <div class="row mb-3">
                             <label for="max_number" class="col-md-4 col-form-label text-md-end">Könyvek száma</label>
                             <div class="col-md-6">
@@ -108,13 +100,13 @@
                                 <input type="text" class="form-control" name="mail" required>
                             </div>
                         </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <input type="submit" value="Könyv kiadása" class="btn btn-primary">
                             </div>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
@@ -160,7 +152,6 @@
             }
         });
     });
-
 </script>
 
 @endsection

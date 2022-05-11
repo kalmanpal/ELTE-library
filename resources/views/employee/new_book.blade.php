@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+<head>
+    <title>Új könyv</title>
+</head>
+
 @section('content')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -9,7 +13,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Új könyv hozzáadása</div>
-
                 <div class="card-body">
                     <form method="POST" action="newbook" enctype="multipart/form-data">
                         @csrf
@@ -105,7 +108,6 @@
                             <label class="cb-text" for="send_email">Értesítő email küldése a könyv érkezéséről.</label><br>
                         </div>
 
-
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <input type="submit" value="Hozzáad" class="btn btn-primary">
@@ -117,6 +119,7 @@
         </div>
     </div>
 </div>
+
 <?php
 if(session()->has('newBookFailed')){
     echo "<script>alert('".session('newBookFailed')."');</script>";
@@ -163,7 +166,6 @@ if(session()->has('newBookFailed')){
             }
         });
     });
-
 </script>
 
 @endsection

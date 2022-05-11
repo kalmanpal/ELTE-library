@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+<head>
+    <title>Foglalások</title>
+</head>
+
 @section('content')
 
 <div class="container">
@@ -7,18 +12,16 @@
             <div class="card">
                 <div class="card-header">Könyv foglalások</div>
                 <div class="card-body">
-
                     <table class="table">
                         <thead>
-                          <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Cím</th>
-                            <th scope="col">ISBN</th>
-                            <th scope="col">Író</th>
-                            <th scope="col">Foglaló</th>
-                            <th scope="col">Email</th>
-                            <th></th>
-                          </tr>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Cím</th>
+                                <th scope="col">ISBN</th>
+                                <th scope="col">Író</th>
+                                <th scope="col">Foglaló</th>
+                                <th scope="col">Email</th>
+                            </tr>
                         </thead>
 
                         <tbody>
@@ -48,9 +51,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
-
-
-
+                    </table>
                 </div>
             </div>
         </div>

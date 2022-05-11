@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 <?php
     use Carbon\Carbon;
 ?>
@@ -6,7 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <head>
-    <title>Profil</title>
+    <title>{{$member->name}}</title>
 </head>
 
 @section('content')
@@ -15,7 +16,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ $member->name }}</div>
-
                 <div class="card-body">
                     <form method="POST" action="{{ url('update-member-data/'.$member->id) }}" id="mentes-form">
                         @method('PUT')
@@ -23,10 +23,8 @@
 
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">Név</label>
-
                             <div class="col-md-6">
                                 <input class="form-control" name="name" value="{{ $member->name }}" required minlength="3" maxlength="35"  autofocus id="onlyLettersName">
-
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -35,14 +33,10 @@
                             </div>
                         </div>
 
-                        {{-- --- --}}
-
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">Email</label>
-
                             <div class="col-md-6">
                                 <input class="form-control" name="email" value="{{ $member->email }}" readonly>
-
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -53,10 +47,8 @@
 
                         <div class="row mb-3">
                             <label for="city" class="col-md-4 col-form-label text-md-end">Település</label>
-
                             <div class="col-md-6">
                                 <input class="form-control " name="city" value="{{ $member->city }}" required minlength="2" maxlength="30" id="onlyLettersCity">
-
                                 @error('city')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -67,10 +59,8 @@
 
                         <div class="row mb-3">
                             <label for="address" class="col-md-4 col-form-label text-md-end">Cím</label>
-
                             <div class="col-md-6">
                                 <input class="form-control" name="address" value="{{ $member->address }}" required minlength="3" maxlength="40">
-
                                 @error('address')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -79,13 +69,9 @@
                             </div>
                         </div>
 
-                        {{-- <div>Jelenlegi tagság típusa: {{ $member->type }}. Amennyiben változtatni akarsz, lenn megteheted.</div> --}}
-
                         <div class="row mb-3">
                             <label for="type" class="col-md-4 col-form-label text-md-end">Tagság típusa</label>
-
                             <div class="col-md-6">
-
                                 <select class="form-select" name="type" required>
                                     <option selected style="color: lightgrey" value="{{ $member->type }}">{{ $member->type }}</option>
                                     <option value="ES">ELTE hallgató</option>
@@ -95,7 +81,6 @@
                                 </select>
                             </div>
                         </div>
-
                     </form>
 
                     <form method="GET" action="/activate/{{$member->id}}" id="hiteles-form">
@@ -158,9 +143,8 @@
                                     </tr>
                                 @endforeach
                             </tbody>
+                        </table>
                     @endif
-
-
                 </div>
             </div>
         </div>
