@@ -87,15 +87,15 @@ class RegisterController extends Controller
 
         if($user->type === "ES")
         {
-            $user->max = 10;
+            $user->max = 5;
         }else
         if($user->type === "ET")
         {
-            $user->max = 20;
+            $user->max = 10;
         }else
         if($user->type === "O")
         {
-            $user->max = 5;
+            $user->max = 3;
         }
         $user-> save();
 

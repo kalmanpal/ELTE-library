@@ -87,7 +87,7 @@ class Kernel extends ConsoleKernel
             $numberOfUsers = $lateRents->countBy('email');
             $userList = $numberOfUsers->keys();
 
-            $dailyFee = 40;
+            $dailyFee = 50;
 
             for($i = 0; $i<$userList->count(); $i++)
             {

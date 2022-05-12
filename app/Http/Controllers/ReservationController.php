@@ -132,11 +132,11 @@ class ReservationController extends Controller
         ->where('users.email', "=", Auth::user()->email)
         ->get();
 
-        $subs = DB::table('oldsubs')
-        ->where('oldsubs.email', '=', $user[0]->email)
+        $subs = DB::table('subscriptions')
+        ->where('subscriptions.email', '=', $user[0]->email)
         ->get();
 
-        if($subs->last()->to < Carbon::today())
+        if($subs[0]->active == '0')
         {
             $subToUpdate = DB::table('subscriptions')
             ->where('subscriptions.email', $user[0]->email)
@@ -158,7 +158,7 @@ class ReservationController extends Controller
             $res->expiry = Carbon::tomorrow();
             $res->email = Auth::user()->email;
             $res->isbn = $stock->isbn;
-            if ($current < $max) {
+            if (($current < $max) && ($stock->available_number > 0)) {
                 $res->save();
                 $userToSave = DB::table('users')
                     ->where('users.email', Auth::user()->email)
@@ -277,7 +277,7 @@ class ReservationController extends Controller
                 session(['reservation' => 'Foglalás Sikeres!']);
                 return redirect('/myreservations');
             }else {
-                session(['reservation' => 'Egyszerre nem foglalhatsz, vagy kölcsönözhetsz több könyvet!']);
+                session(['reservation' => 'Egyszerre nem foglalhatsz, vagy kölcsönözhetsz több könyvet, vagy ebből a könyvből jelenleg nincs készleten egy sem!']);
                 return redirect('/books-available');
             }
         }
@@ -332,8 +332,8 @@ class ReservationController extends Controller
             ->join('books', 'reservations.isbn', "=", 'books.isbn')
             ->join('users', 'reservations.email', "=", 'users.email')
             ->select('title', 'name', 'reservations.email', 'reservations.isbn', 'expiry', 'reservations.id','picture','writer', 'release', 'edition',)
-            ->orderBy('reservations.expiry', 'asc')
-            ->get();
+            ->orderBy('users.name', 'asc')
+            ->paginate(10);
         return view('employee/reservations', ['reservations' => $data]);
     }
 }

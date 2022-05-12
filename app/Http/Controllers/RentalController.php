@@ -23,7 +23,7 @@ class RentalController extends Controller
             ->select('users.name', 'rentals.email', 'rentals.out_date', 'rentals.isbn', 'rentals.deadline', 'rentals.id', 'title',)
             ->whereNull('in_date')
             ->orderBy('users.name', 'asc')
-            ->get();
+            ->paginate(20);
         return view('employee/active_rentals', ['rentals' => $data]);
     }
 
@@ -35,8 +35,8 @@ class RentalController extends Controller
             ->join('books', 'stocks.isbn', "=", 'books.isbn')
             ->select('users.name', 'rentals.email', 'rentals.out_date', 'rentals.isbn', 'rentals.deadline', 'rentals.id', 'title', 'in_date')
             ->whereNotNull('in_date')
-            ->orderBy('users.name', 'asc')
-            ->get();
+            ->orderBy('rentals.in_date', 'desc')
+            ->paginate(20);
         return view('employee/closed_rentals', ['rentals' => $data]);
     }
 
@@ -48,7 +48,7 @@ class RentalController extends Controller
             ->where('email', '=', Auth::user()->email)
             ->orderBy('in_date', 'desc')
             ->select('rentals.out_date', 'rentals.isbn', 'rentals.deadline', 'rentals.id', 'title', 'in_date', 'rentals.rating')
-            ->get();
+            ->paginate(20);
         return view('member/my_rentals', ['rentals' => $data]);
     }
 
@@ -66,13 +66,13 @@ class RentalController extends Controller
         $type = $seged[0]->type;
 
         if ($type == "ES") {
-            $rent->deadline = Carbon::today()->addMonth(3);
+            $rent->deadline = Carbon::today()->addMonth(2);
         } elseif($type == "ET")
         {
-            $rent->deadline = Carbon::today()->addMonth(6);
+            $rent->deadline = Carbon::today()->addMonth(3);
         } elseif($type == "O")
         {
-            $rent->deadline = Carbon::today()->addMonth(1);
+            $rent->deadline = Carbon::today()->addWeek(2);
         }
 
         $rent->isbn = $res->isbn;
@@ -128,11 +128,11 @@ class RentalController extends Controller
 
         if($user->isNotEmpty()){
 
-            $subs = DB::table('oldsubs')
-            ->where('oldsubs.email', '=', $user[0]->email)
+            $subs = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', $user[0]->email)
             ->get();
 
-            if($subs->last()->to < Carbon::today())
+            if($subs[0]->active == '0')
             {
                 $subToUpdate = DB::table('subscriptions')
                 ->where('subscriptions.email', $user[0]->email)
@@ -161,13 +161,13 @@ class RentalController extends Controller
                 $max = $user[0]->max;
 
                 if ($type == "ES") {
-                    $rental->deadline = Carbon::today()->addMonth(3);
+                    $rental->deadline = Carbon::today()->addMonth(2);
                 } elseif($type == "ET")
                 {
-                    $rental->deadline = Carbon::today()->addMonth(6);
+                    $rental->deadline = Carbon::today()->addMonth(3);
                 } elseif($type == "O")
                 {
-                    $rental->deadline = Carbon::today()->addMonth(1);
+                    $rental->deadline = Carbon::today()->addWeek(2);
                 }
 
                 if (($current < $max) && ($stock->available_number > 0)) {

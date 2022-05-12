@@ -12,34 +12,6 @@
             <div class="card">
                 <div class="card-header">Neked ajánljuk</div>
                 <div class="card-body">
-
-
-                            {{-- @foreach ($books as $item)
-                                <tr id="{{ $item->id }}" href>
-                                    <td>
-                                        <img src="{{ asset('storage/app/pictures/'.$item->picture) }}" class="w-10">
-                                        </td>
-                                    <td>
-                                    <a class="td_class" href="{{ url('book/'.$item->id) }}">{{ $item->title }}</a>
-                                    </td>
-                                    <td>
-                                        {{ $item->isbn }}
-                                    </td>
-                                    <td>
-                                        {{ $item->writer }}
-                                    </td>
-                                    <td>
-                                        {{ $item->release }}
-                                    </td>
-                                    <td>
-                                        {{ $item->edition }}
-                                    </td>
-                                </tr>
-                            @endforeach --}}
-
-
-
-
                     <div class="webshop-container">
                         @foreach ($books as $item)
                             <a class="no-underline" href="{{ url('book/'.$item->id) }}">
@@ -56,7 +28,7 @@
                                             <p class="card-text card-remove-gap">Olvasói értékelés: {{ $item->sum / $item->numberofratings }}/5</p>
                                         @endif
                                     </div>
-                                </div>
+                              </div>
                             </a>
                         @endforeach
                     </div>

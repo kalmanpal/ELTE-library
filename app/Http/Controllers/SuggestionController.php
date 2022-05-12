@@ -81,7 +81,7 @@ class SuggestionController extends Controller
         ->where('stocks.available_number', '>', 0)
         ->where('books.category', $seged)
         ->orderBy('title', 'asc')
-        ->paginate(4);
+        ->paginate(12);
 
         return view('member/suggestions', ['books' => $booksToSuggest]);
     }

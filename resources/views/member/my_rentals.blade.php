@@ -98,4 +98,8 @@
     </div>
 </div>
 
+<div class="paginate-container">
+    {{$rentals->links()}}
+</div>
+
 @endsection

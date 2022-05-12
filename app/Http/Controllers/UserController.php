@@ -23,7 +23,7 @@ class UserController extends Controller
         ->where('type', '=', 'ES')
         ->orwhere('type', '=', 'ET')
         ->orwhere('type', '=', 'O')
-        ->paginate(2);
+        ->paginate(20);
         return view('employee/users',['users'=>$data]);
     }
 
@@ -113,15 +113,15 @@ class UserController extends Controller
 
             if($req->type === "ES")
             {
-                $user->max = 10;
+                $user->max = 5;
 
             }elseif($req->type === "ET")
             {
-                $user->max = 20;
+                $user->max = 10;
 
             }elseif($req->type === "O")
             {
-                $user->max = 5;
+                $user->max = 3;
             }
 
             $user-> password=bcrypt($req->password);
