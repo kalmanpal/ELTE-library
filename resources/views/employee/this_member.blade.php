@@ -125,6 +125,9 @@
                                 <th>
                                     Státusz
                                 </th>
+                                <th>
+                                    Fizetve
+                                </th>
                                 @foreach ($subs as $item)
                                     <tr>
                                         <td>
@@ -139,6 +142,9 @@
                                             @else
                                                 Lejárt
                                             @endif
+                                        </td>
+                                        <td>
+                                            {{ $item->paidfee }} Ft
                                         </td>
                                     </tr>
                                 @endforeach

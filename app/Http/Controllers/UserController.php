@@ -162,15 +162,20 @@ class UserController extends Controller
     {
         $userToActivate = User::find($id);
 
+        $sub = DB::table('subscriptions')
+        ->where('subscriptions.email', '=', $userToActivate->email)
+        ->get();
+
+        $feeWithDiscounts = $sub[0]->price * (1 - ($sub[0]->discounts/100));
+
         $subToSave = new Oldsub();
         $subToSave->email = $userToActivate->email;
         $subToSave->from = Carbon::today();
         $subToSave->to = Carbon::today()->addMonth(6);
+        $subToSave->discount = $sub[0]->discounts;
+        $subToSave->plusfee = $sub[0]->plus_charge;
+        $subToSave->paidfee = $feeWithDiscounts + $sub[0]->plus_charge;
         $subToSave->save();
-
-        $sub = DB::table('subscriptions')
-        ->where('subscriptions.email', '=', $userToActivate->email)
-        ->get();
 
         $subToUpdate = DB::table('subscriptions')
             ->where('subscriptions.email', $userToActivate->email)

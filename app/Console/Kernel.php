@@ -24,7 +24,7 @@ class Kernel extends ConsoleKernel
             ->where('subscriptions.subexpiry',"<", Carbon::today())
             ->update(['subscriptions.active' => '0']);
 
-        })->dailyAt('00:00')->timezone('Europe/Budapest');
+        })->everyMinute();
 
 
 
@@ -102,7 +102,7 @@ class Kernel extends ConsoleKernel
                 ->update(['subscriptions.plus_charge' => $sub[0]->plus_charge + $dailyFeeSum]);
             }
 
-        })->dailyAt('00:00')->timezone('Europe/Budapest');
+        })->everyMinute();
 
     }
 

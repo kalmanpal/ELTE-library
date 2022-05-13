@@ -67,16 +67,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // $user = User::create([
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],
-        //     'password' => Hash::make($data['password']),
-        //     'city' => $data['city'],
-        //     'address' => $data['address'],
-        //     'type' => $data['type'],
-        // ]);
-
-
         $user = new User;
         $user-> name=$data['name'];
         $user-> email=$data['email'];
@@ -99,18 +89,30 @@ class RegisterController extends Controller
         }
         $user-> save();
 
-        $email = $user->email;
-        Badge::create([
-            'email'=> $email,
-        ]);
+        $badge = New Badge;
+        $badge->email = $data['email'];
+        $badge->save();
 
-        Subscription::create([
-            'email'=> $email,
-        ]);
+        $suggestion = New Suggestion;
+        $suggestion->email = $data['email'];
+        $suggestion->save();
 
-        Suggestion::create([
-            'email'=> $email,
-        ]);
+        $subscription = New Subscription;
+        $subscription->email = $data['email'];
+
+        if($data['type'] === "ES")
+        {
+            $subscription->price = 2500;
+        }else
+        if($data['type'] === "ET")
+        {
+            $subscription->price = 2000;
+        }else
+        if($data['type'] === "O")
+        {
+            $subscription->price = 4000;
+        }
+        $subscription->save();
 
         return $user;
     }

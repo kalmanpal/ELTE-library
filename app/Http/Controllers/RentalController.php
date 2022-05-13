@@ -33,7 +33,7 @@ class RentalController extends Controller
             ->join('stocks', 'rentals.isbn', "=", 'stocks.isbn')
             ->join('users', 'rentals.email', "=", 'users.email')
             ->join('books', 'stocks.isbn', "=", 'books.isbn')
-            ->select('users.name', 'rentals.email', 'rentals.out_date', 'rentals.isbn', 'rentals.deadline', 'rentals.id', 'title', 'in_date')
+            ->select('users.name', 'rentals.email', 'rentals.out_date', 'rentals.isbn', 'rentals.deadline', 'rentals.id', 'title', 'in_date', 'rentals.plus_charge')
             ->whereNotNull('in_date')
             ->orderBy('rentals.in_date', 'desc')
             ->paginate(20);
@@ -87,9 +87,12 @@ class RentalController extends Controller
 
     function bookIsBack($id)
     {
-
         $rent = Rental::find($id);
         $rent->in_date = Carbon::today();
+
+        $difference = Carbon::parse($rent->deadline)->diffInDays(Carbon::today());
+
+        $rent->plus_charge = $difference * 50;
         $email = $rent->email;
         $rent->save();
 
@@ -114,6 +117,15 @@ class RentalController extends Controller
         $stock = DB::table('stocks')
             ->where('stocks.isbn', $rent->isbn)
             ->update(['available_number' => $number + 1]);
+
+
+        $subscription = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', $email)
+            ->get();
+
+        $subscriptionToUpdate = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', $email)
+            ->update(['plus_charge' => ($subscription[0]->plus_charge) - ($difference * 50)]);
 
         //session(['bookback' => 'A könyv visszahozva!']);
 

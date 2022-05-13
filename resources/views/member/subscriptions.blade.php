@@ -12,7 +12,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Előfizetéseim</div>
                     <div class="card-body">
@@ -38,11 +38,13 @@
                                 <h6>Korábbi előfizetések</h6>
                                 <th>Kezdés</th>
                                 <th>Lejárat</th>
+                                <th>Fizetve</th>
                                 <tbody>
                                     @foreach ($oldSubs as $item)
                                         <tr>
                                             <td>{{ $item->from }}</td>
                                             <td>{{ $item->to }}</td>
+                                            <td>{{ $item->paidfee }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

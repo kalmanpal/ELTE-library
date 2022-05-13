@@ -20,6 +20,7 @@ class CreateRentalsTable extends Migration
             $table->date('deadline');
             $table->char('isbn' , 13);
             $table->integer('rating')->nullable();
+            $table->integer('plus_charge')->nullable();
             $table->foreign('isbn')->references('isbn')->on('stocks');
             $table->string('email');
             $table->foreign('email')->references('email')->on('users');

@@ -19,6 +19,9 @@ class CreateOldsubsTable extends Migration
             $table->foreign('email')->references('email')->on('users');
             $table->date('from');
             $table->date('to');
+            $table->integer('discount')->default('0');
+            $table->integer('plusfee')->default('0');
+            $table->integer('paidfee');
             $table->timestamps();
         });
     }

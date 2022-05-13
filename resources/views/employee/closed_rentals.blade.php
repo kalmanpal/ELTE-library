@@ -29,6 +29,7 @@
                                     <th scope="col">Kiadás dátuma</th>
                                     <th scope="col">Határidő</th>
                                     <th scope="col">Visszavétel dátuma</th>
+                                    <th scope="col">Késedelmi díj</th>
                                 </tr>
                             </thead>
 
@@ -42,6 +43,7 @@
                                         <td>{{ $item->out_date }}</td>
                                         <td>{{ $item->deadline }}</td>
                                         <td>{{ $item->in_date }}</td>
+                                        <td>{{ $item->plus_charge }} Ft</td>
                                     </tr>
                                 @endforeach
                             </tbody>

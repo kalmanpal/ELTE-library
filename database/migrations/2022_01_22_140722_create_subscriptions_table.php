@@ -20,7 +20,7 @@ class CreateSubscriptionsTable extends Migration
             $table->integer('all_months')->default('0');
             $table->boolean('active')->default('0');
             $table->date('subexpiry')->nullable();
-            $table->integer('streak')->default('0');
+            $table->integer('price')->nullable();
             $table->integer('discounts')->default('0');
             $table->integer('plus_charge')->default('0');
             $table->timestamps();
