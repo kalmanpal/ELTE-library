@@ -53,7 +53,7 @@ class UserController extends Controller
         $member = User::find($id);
         $subs = DB::table('oldsubs')
         ->where('oldsubs.email', '=', $member->email)
-        ->orderBy('to', 'asc')
+        ->orderBy('to', 'desc')
         ->get();
 
         $isActive = DB::table('subscriptions')
@@ -65,22 +65,13 @@ class UserController extends Controller
             return view('employee.this_member', compact('member', 'subs', 'isActive'));
         }else
         {
-            if(($subs->last()->to < Carbon::today()) && ($isActive[0]->active != 0))
-            {
-                $subToUpdate = DB::table('subscriptions')
-                ->where('subscriptions.email', $member->email)
-                ->update([
-                    'active'  => '0'
-                ]);
+            $isActive = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', $member->email)
+            ->get();
 
-                $isActive = DB::table('subscriptions')
-                ->where('subscriptions.email', '=', $member->email)
-                ->get();
-            }
             return view('employee.this_member', compact('member', 'subs', 'isActive'));
         }
     }
-
 
     public function updateAsEmp(Request $req, $id)
     {

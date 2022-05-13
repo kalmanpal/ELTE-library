@@ -24,8 +24,7 @@ class Kernel extends ConsoleKernel
             ->where('subscriptions.subexpiry',"<", Carbon::today())
             ->update(['subscriptions.active' => '0']);
 
-        })->everyMinute();
-
+        })->dailyAt('00:00')->timezone('Europe/Budapest');
 
 
         $schedule->call(function () {// checks if any reservations are expired
@@ -102,7 +101,7 @@ class Kernel extends ConsoleKernel
                 ->update(['subscriptions.plus_charge' => $sub[0]->plus_charge + $dailyFeeSum]);
             }
 
-        })->everyMinute();
+        })->dailyAt('00:00')->timezone('Europe/Budapest');
 
     }
 
