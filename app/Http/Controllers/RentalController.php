@@ -92,7 +92,14 @@ class RentalController extends Controller
 
         $difference = Carbon::parse($rent->deadline)->diffInDays(Carbon::today());
 
-        $rent->plus_charge = $difference * 50;
+        if(Carbon::today() > $rent->deadline)
+        {
+            $rent->plus_charge = $difference * 50;
+        }else{
+            $rent->plus_charge = 0;
+        }
+
+
         $email = $rent->email;
         $rent->save();
 
@@ -123,9 +130,12 @@ class RentalController extends Controller
             ->where('subscriptions.email', '=', $email)
             ->get();
 
-        $subscriptionToUpdate = DB::table('subscriptions')
+        if(Carbon::today() > $rent->deadline)
+        {
+            $subscriptionToUpdate = DB::table('subscriptions')
             ->where('subscriptions.email', '=', $email)
             ->update(['plus_charge' => ($subscription[0]->plus_charge) - ($difference * 50)]);
+        }
 
         //session(['bookback' => 'A könyv visszahozva!']);
 
@@ -307,5 +317,22 @@ class RentalController extends Controller
             session(['rent' => 'A kölcsönzés sikertelen, nincs a megadott email címmel regisztrált felhasználó!']);
             return redirect('/books');
         }
+    }
+
+    function searchRentsByEmp()
+    {
+        $search_text = $_GET['emp-rents-query'];
+
+        $rentsSearched= DB::table('rentals')
+        ->join('stocks', 'rentals.isbn', "=", 'stocks.isbn')
+            ->join('users', 'rentals.email', "=", 'users.email')
+            ->join('books', 'stocks.isbn', "=", 'books.isbn')
+            ->select('users.name', 'rentals.email', 'rentals.out_date', 'rentals.isbn', 'rentals.deadline', 'rentals.id', 'title',)
+            ->whereNull('in_date')
+            ->where('name', 'LIKE', '%'.$search_text.'%')
+            ->orderBy('name', 'asc')
+            ->paginate(5);
+
+        return view('employee.rentals_results', compact('rentsSearched'));
     }
 }

@@ -1,9 +1,4 @@
 @extends('layouts.app')
-
-<head>
-    <title>Könyvek</title>
-</head>
-
 @section('content')
 
 <div class="container">
@@ -38,7 +33,7 @@
                                         @if ($item->numberofratings === 0)
                                             <p class="card-text card-remove-gap">-</p>
                                         @else
-                                            <p class="card-text card-remove-gap">Olvasói értékelés: {{ $item->sum / $item->numberofratings }}/5</p>
+                                            <p class="card-text card-remove-gap">Olvasói értékelés: {{ round($item->sum / $item->numberofratings, 1) }}/5</p>
                                         @endif
                                     </div>
                               </div>

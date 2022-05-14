@@ -27,7 +27,7 @@
                             @if ($books->numberofratings === 0)
                                 <label for="description" class="pt-3 pb-3">Olvasói értékelés: -</label>
                             @else
-                                <label for="description" class="pt-3 pb-3">Olvasói értékelés: 5/{{ $books->sum / $books->numberofratings }}  -  ({{$books->numberofratings}} értékelés)</label>
+                                <label for="description" class="pt-3 pb-3">Olvasói értékelés: {{ round($books->sum / $books->numberofratings, 1) }}/5  -  ({{$books->numberofratings}} értékelés)</label>
                             @endif
                         </div>
                     </div>

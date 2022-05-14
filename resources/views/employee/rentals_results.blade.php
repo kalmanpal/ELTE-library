@@ -14,22 +14,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <form type="get" method="GET" action="{{ url('/emp-search-rents-results') }}" >
-                        @csrf
-                        <div class="searchbar-container">
-                            <div>
-                                Aktív kölcsönzések
-                            </div>
-                            <div>
-                                <input class="text-input-area"  type="search"  name="emp-rents-query" placeholder="Itt kereshet..." required>
-                                <button type="submit" class="search-button">Keresés</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                <div class="card-header">Aktív kölcsönzések</div>
                 <div class="card-body">
-                    @if ($rentals->isEmpty())
+                    @if ($rentsSearched->isEmpty())
                         <div>Jelenleg nincsenek aktív kölcsönzések.</div>
                     @else
                         <table class="table">
@@ -46,7 +33,7 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($rentals as $item)
+                                @foreach ($rentsSearched as $item)
                                     <tr>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
@@ -71,7 +58,7 @@
 </div>
 
 <div class="paginate-container">
-    {{$rentals->links()}}
+    {{$rentsSearched->links()}}
 </div>
 
 <?php

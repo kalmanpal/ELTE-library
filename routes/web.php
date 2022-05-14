@@ -8,6 +8,7 @@ use App\Http\Controllers\RentalController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\OldsubController;
+use App\Models\Reservation;
 use GuzzleHttp\Middleware;
 
 /*
@@ -99,3 +100,6 @@ Route::group(['middleware' => ['comPages']], function(){
 });
 
 //--------------------------------------------------NOT FINISHED------------------------------------------------------
+
+Route::get('/emp-search-res-results',[ReservationController::class,'searchResByEmp']);
+Route::get('/emp-search-rents-results',[RentalController::class,'searchRentsByEmp']);

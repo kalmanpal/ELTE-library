@@ -148,12 +148,12 @@ class BookController extends Controller
 
     public function searchBooksByEmp()
     {
-        $search_text = $_GET['emp-book-query'];;
+        $search_text = $_GET['emp-book-query'];
 
         $booksSearchedByEmp = DB::table('books')->join('stocks', 'books.isbn', "=", 'stocks.isbn')
         ->where('title', 'LIKE', '%'.$search_text.'%')
         ->orderBy('title', 'asc')
-        ->paginate(1);
+        ->paginate(4);
 
         return view('employee.book_results', compact('booksSearchedByEmp'));
     }

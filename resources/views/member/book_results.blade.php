@@ -21,10 +21,15 @@
                                     <div class="card" style="width: 15rem;">
                                         <img class="book-image" src="{{ asset('/storage/pictures/'.$item->picture) }}" class="card-img-top" alt="...">
                                         <div class="card-body" style="height: 190px">
-                                           <h5 class="card-title">{{ $item->title }}</h5>
+                                            <h5 class="card-title">{{ $item->title }}</h5>
                                             <p class="card-text card-remove-gap">{{ $item->isbn }}</p>
                                             <p class="card-text card-remove-gap">{{ $item->writer }}</p>
                                             <p class="card-text card-remove-gap">{{ $item->release }}</p>
+                                            @if ($item->numberofratings === 0)
+                                                <p class="card-text card-remove-gap">-</p>
+                                            @else
+                                                <p class="card-text card-remove-gap">Olvasói értékelés: {{ round($item->sum / $item->numberofratings, 1) }}/5</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </a>

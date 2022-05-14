@@ -336,4 +336,18 @@ class ReservationController extends Controller
             ->paginate(10);
         return view('employee/reservations', ['reservations' => $data]);
     }
+
+    function searchResByEmp()
+    {
+        $search_text = $_GET['emp-res-query'];
+
+        $resSearched= DB::table('reservations')
+        ->join('users', 'reservations.email', "=", 'users.email')
+        ->join('books', 'reservations.isbn', "=", 'books.isbn')
+        ->where('name', 'LIKE', '%'.$search_text.'%')
+        ->orderBy('name', 'asc')
+        ->paginate(5);
+
+        return view('employee.res_results', compact('resSearched'));
+    }
 }
