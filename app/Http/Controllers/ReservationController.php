@@ -345,6 +345,7 @@ class ReservationController extends Controller
         ->join('users', 'reservations.email', "=", 'users.email')
         ->join('books', 'reservations.isbn', "=", 'books.isbn')
         ->where('name', 'LIKE', '%'.$search_text.'%')
+        ->select('reservations.id', 'users.name', 'reservations.email', 'reservations.expiry', 'books.title', 'reservations.isbn', 'books.writer')
         ->orderBy('name', 'asc')
         ->paginate(5);
 

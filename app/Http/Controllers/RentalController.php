@@ -327,7 +327,7 @@ class RentalController extends Controller
         ->join('stocks', 'rentals.isbn', "=", 'stocks.isbn')
             ->join('users', 'rentals.email', "=", 'users.email')
             ->join('books', 'stocks.isbn', "=", 'books.isbn')
-            ->select('users.name', 'rentals.email', 'rentals.out_date', 'rentals.isbn', 'rentals.deadline', 'rentals.id', 'title',)
+            ->select('rentals.id', 'users.name', 'rentals.email', 'rentals.out_date', 'rentals.isbn', 'rentals.deadline', 'rentals.id', 'title',)
             ->whereNull('in_date')
             ->where('name', 'LIKE', '%'.$search_text.'%')
             ->orderBy('name', 'asc')
