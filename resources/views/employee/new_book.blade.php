@@ -70,7 +70,7 @@
                             <label for="type" class="col-md-4 col-form-label text-md-end">Kategória</label>
                             <div class="col-md-6">
                                 <select class="form-select" name="category" required>
-                                    <option selected style="color: lightgrey"></option>
+                                    <option value="" disabled selected hidden >Válasszon...</option>
                                     <option value="LT">Életstílus</option>
                                     <option value="F">Gasztro</option>
                                     <option value="KID">Gyerek</option>

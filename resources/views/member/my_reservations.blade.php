@@ -18,38 +18,32 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">Cím</th>
-                                    <th scope="col">ISBN</th>
+                                    <th scope="col">Könyv</th>
                                     <th scope="col">Író</th>
                                     <th scope="col">Kiadás éve</th>
-                                    <th scope="col">Kiadás</th>
+                                    <th scope="col">ISBN</th>
+                                    <th></th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 @foreach ($myreservations as $item)
                                     <tr id="{{ $item->id }}" href>
-                                        <td>
-                                            <img src="{{ asset('storage/app/pictures/'.$item->picture) }}" class="w-10">
-                                            </td>
-                                        <td class="myRes">
+
+                                        <td >
                                             {{ $item->title }}
                                         </td>
-                                        <td class="myRes">
-                                            {{ $item->isbn }}
-                                        </td>
-                                        <td class="myRes">
+                                        <td >
                                             {{ $item->writer }}
                                         </td>
-                                        <td class="myRes">
+                                        <td >
                                             {{ $item->release }}
                                         </td>
-                                        <td class="myRes">
-                                            {{ $item->edition }}
+                                        <td >
+                                            {{ $item->isbn }}
                                         </td>
                                         <td>
-                                            <a href="/deleteReservation/{{ $item->id }}"><button class="btn btn-primary">Foglalás törlése</button></a>
+                                            <a href="/deleteReservation/{{ $item->id }}"><button class="btn btn-primary btn-sm">Foglalás törlése</button></a>
                                         </td>
                                     </tr>
                                 @endforeach

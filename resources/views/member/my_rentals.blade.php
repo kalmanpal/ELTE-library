@@ -22,12 +22,13 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Cím</th>
+                                    <th scope="col">Könyv</th>
                                     <th scope="col">ISBN</th>
                                     <th scope="col">Kölcsönzés dátuma</th>
                                     <th scope="col">Határidő</th>
                                     <th scope="col">Visszahozva</th>
                                     <th scope="col">Értékelés</th>
+                                    <th scope="col">Késedelmi díj</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,6 +53,11 @@
                                             </td>
                                         @else
                                             <td>-</td>
+                                        @endif
+                                        @if ($item->plus_charge == 0)
+                                            <td>-</td>
+                                        @else
+                                            <td>{{ $item->plus_charge }}</td>
                                         @endif
                                     </tr>
 

@@ -12,7 +12,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Lezárt Kölcsönzések</div>
                 <div class="card-body">
@@ -22,9 +22,9 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Név</th>
+                                    <th scope="col">Kölcsönző</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Cím</th>
+                                    <th scope="col">Könyv</th>
                                     <th scope="col">ISBN</th>
                                     <th scope="col">Kiadás dátuma</th>
                                     <th scope="col">Határidő</th>

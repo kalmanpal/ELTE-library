@@ -31,9 +31,15 @@
                                         <td>
                                             {{ $item->address }}
                                         </td>
-                                        <td>
-                                            {{ $item->type }}
-                                        </td>
+                                        @if ( $item->type  === 'ES')
+                                        <td>ELTE hallgató</td>
+                                        @endif
+                                        @if ( $item->type  === 'ET')
+                                            <td>ELTE oktató</td>
+                                        @endif
+                                        @if ( $item->type  === 'O')
+                                            <td>Egyéb</td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

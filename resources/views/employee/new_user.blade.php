@@ -69,7 +69,7 @@
                             <label for="type" class="col-md-4 col-form-label text-md-end">{{ __('Tagság típusa') }}</label>
                             <div class="col-md-6">
                                 <select class="form-select" name="type" required>
-                                    <option selected style="color: lightgrey">Válassz...</option>
+                                    <option value="" disabled selected hidden style="color: lightgrey">Válassz...</option>
                                     <option value="ES">ELTE hallgató</option>
                                     <option value="ET">ELTE oktató</option>
                                     <option value="O">Egyéb</option>

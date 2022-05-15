@@ -25,7 +25,7 @@
                         </div>
                         <div class="bottom-container">
                             <div class="progress" style="width: 800px; height: 24px;">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: {{$data[0]*20}}%;" aria-valuenow="{{$data[0]}}" aria-valuemin="0" aria-valuemax="5"></div>
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: {{$data[0]*20}}%;" aria-valuenow="{{$data[0]}}" aria-valuemin="0" aria-valuemax="5"></div>
                             </div>
                             <div class="icon">
                                 @if ($data[0] >= 5)
@@ -49,7 +49,7 @@
                         </div>
                         <div class="bottom-container">
                             <div class="progress" style="width: 800px; height: 24px;">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: {{$data[0]*10}}%;" aria-valuenow="{{$data[0]}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: {{$data[0]*10}}%;" aria-valuenow="{{$data[0]}}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <div class="icon">
                                 @if ($data[0] >= 10)
@@ -73,7 +73,7 @@
                         </div>
                         <div class="bottom-container">
                             <div class="progress" style="width: 800px; height: 24px;">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: {{$data[0]*5}}%;" aria-valuenow="{{$data[0]}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: {{$data[0]*5}}%;" aria-valuenow="{{$data[0]}}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <div class="icon">
                                 @if ($data[0] >= 20)
@@ -121,7 +121,7 @@
                         </div>
                         <div class="bottom-container">
                             <div class="progress" style="width: 800px; height: 24px;">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: {{$data[2]*50}}%;" aria-valuenow="{{$data[2]}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" style="width: {{$data[2]*50}}%;" aria-valuenow="{{$data[2]}}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <div class="icon">
                                 @if ($data[2] >= 2)

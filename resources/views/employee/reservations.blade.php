@@ -1,9 +1,4 @@
 @extends('layouts.app')
-
-<head>
-    <title>Foglalások</title>
-</head>
-
 @section('content')
 
 <div class="container">
@@ -31,37 +26,30 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">Cím</th>
-                                    <th scope="col">ISBN</th>
-                                    <th scope="col">Író</th>
-                                    <th scope="col">Foglaló</th>
-                                    <th scope="col">Email</th>
+                                    <th >Foglaló</th>
+                                    <th >Email</th>
+                                    <th >Könyv</th>
+                                    <th >ISBN</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($reservations as $item)
                                     <tr id="{{ $item->id }}" href>
-                                        <td>
-                                            <img src="{{ asset('storage/app/pictures/'.$item->picture) }}" class="w-10">
-                                            </td>
-                                        <td class="myRes">
-                                            {{ $item->title }}
-                                        </td>
-                                        <td class="myRes">
-                                            {{ $item->isbn }}
-                                        </td>
-                                        <td class="myRes">
-                                            {{ $item->writer }}
-                                        </td>
-                                        <td class="myRes">
+                                        <td >
                                             {{ $item->name }}
                                         </td>
-                                        <td class="myRes">
+                                        <td >
                                             {{ $item->email }}
                                         </td>
+                                        <td >
+                                            {{ $item->title }}
+                                        </td>
+                                        <td >
+                                            {{ $item->isbn }}
+                                        </td>
                                         <td>
-                                            <a  href="rent-from-res/{{ $item->id }}"><button class="btn btn-primary">Könyv kiadása</button></a>
+                                            <a  href="rent-from-res/{{ $item->id }}"><button class="btn btn-primary btn-sm">Könyv kiadása</button></a>
                                         </td>
                                     </tr>
                                 @endforeach

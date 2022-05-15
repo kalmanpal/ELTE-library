@@ -15,7 +15,7 @@ class OldsubController extends Controller
     {
         $oldSubs = DB::table('oldsubs')
         ->where('oldsubs.email', '=', Auth::user()->email)
-        ->orderBy('to', 'asc')
+        ->orderBy('to', 'desc')
         ->get();
 
         $allSubs = DB::table('subscriptions')
@@ -28,7 +28,7 @@ class OldsubController extends Controller
             return view('member.subscriptions', compact('oldSubs', 'allSubs'));
         }else
         {
-            if(($oldSubs->last()->to < Carbon::today()) && ($allSubs[0]->active != 0))
+            if(($oldSubs->first()->to < Carbon::today()) && ($allSubs[0]->active != 0))
             {
                 $subToUpdate = DB::table('subscriptions')
                 ->where('subscriptions.email', Auth::user()->email)

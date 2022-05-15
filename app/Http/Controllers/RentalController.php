@@ -35,7 +35,7 @@ class RentalController extends Controller
             ->join('books', 'stocks.isbn', "=", 'books.isbn')
             ->select('users.name', 'rentals.email', 'rentals.out_date', 'rentals.isbn', 'rentals.deadline', 'rentals.id', 'title', 'in_date', 'rentals.plus_charge')
             ->whereNotNull('in_date')
-            ->orderBy('rentals.in_date', 'desc')
+            ->orderBy('users.name', 'asc')
             ->paginate(20);
         return view('employee/closed_rentals', ['rentals' => $data]);
     }
@@ -47,7 +47,7 @@ class RentalController extends Controller
             ->join('books', 'stocks.isbn', "=", 'books.isbn')
             ->where('email', '=', Auth::user()->email)
             ->orderBy('in_date', 'desc')
-            ->select('rentals.out_date', 'rentals.isbn', 'rentals.deadline', 'rentals.id', 'title', 'in_date', 'rentals.rating')
+            ->select('rentals.out_date', 'rentals.isbn', 'rentals.deadline', 'rentals.id', 'title', 'in_date', 'rentals.rating', 'rentals.plus_charge')
             ->paginate(20);
         return view('member/my_rentals', ['rentals' => $data]);
     }

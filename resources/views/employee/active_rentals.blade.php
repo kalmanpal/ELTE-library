@@ -1,9 +1,4 @@
 @extends('layouts.app')
-
-<head>
-    <title>Aktív kölcsönzések</title>
-</head>
-
 @section('content')
 
 <?php
@@ -35,9 +30,9 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Név</th>
+                                    <th scope="col">Kölcsönző</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Cím</th>
+                                    <th scope="col">Könyv</th>
                                     <th scope="col">ISBN</th>
                                     <th scope="col">Kiadás dátuma</th>
                                     <th scope="col">Határidő</th>
@@ -55,7 +50,7 @@
                                         <td>{{ $item->out_date }}</td>
                                         <td>{{ $item->deadline }}</td>
                                         @if ($item->deadline < Carbon::today())
-                                            <td><a href="book-is-back/{{ $item->id }}"><button class="btn btn-primary">Könyv visszavétel(KÉSÉS)</button></a></td>
+                                            <td><a href="book-is-back/{{ $item->id }}"><button class="btn btn-primary btn-sm">Könyv visszavétel(KÉSÉS)</button></a></td>
                                         @else
                                             <td><a href="book-is-back/{{ $item->id }}"><button class="btn btn-primary btn-sm">Könyv visszavétel</button></a></td>
                                         @endif

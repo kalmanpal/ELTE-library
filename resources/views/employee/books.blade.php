@@ -1,9 +1,4 @@
 @extends('layouts.app')
-
-<head>
-    <title>Könyvek</title>
-</head>
-
 @section('content')
 
 <div class="container mb-4">

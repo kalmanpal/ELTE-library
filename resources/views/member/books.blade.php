@@ -25,11 +25,11 @@
                             <a class="no-underline" href="{{ url('book/'.$item->id) }}">
                                 <div class="card" style="width: 15rem;">
                                     <img class="book-image" src="{{ asset('/storage/pictures/'.$item->picture) }}" class="card-img-top" alt="...">
-                                    <div class="card-body" style="height: 190px">
+                                    <div class="card-body" style="height: 170px">
                                         <h5 class="card-title">{{ $item->title }}</h5>
-                                        <p class="card-text card-remove-gap">{{ $item->isbn }}</p>
-                                        <p class="card-text card-remove-gap">{{ $item->writer }}</p>
+                                        <h6 class="card-text card-remove-gap">{{ $item->writer }}</h6>
                                         <p class="card-text card-remove-gap">{{ $item->release }}</p>
+                                        <p class="card-text card-remove-gap">{{ $item->edition }} kiadás</p>
                                         @if ($item->numberofratings === 0)
                                             <p class="card-text card-remove-gap">-</p>
                                         @else
