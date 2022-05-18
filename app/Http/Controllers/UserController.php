@@ -135,9 +135,22 @@ class UserController extends Controller
             $badges->email = $req->email;
             $badges->save();
 
-            $subs = new Subscription;
-            $subs->email = $req->email;
-            $subs->save();
+            $subscription = New Subscription;
+            $subscription->email = $req->email;
+
+            if($req->type === "ES")
+            {
+                $subscription->price = 2500;
+            }else
+            if($req->type === "ET")
+            {
+                $subscription->price = 2000;
+            }else
+            if($req->type === "O")
+            {
+                $subscription->price = 4000;
+            }
+            $subscription->save();
 
             session(['newUser' => 'Az új felhasználó sikeresen regisztrálva!']);
             return redirect('/users');

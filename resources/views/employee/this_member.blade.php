@@ -98,7 +98,7 @@
                         @if ($isActive[0]->active === 0)
                             <div class="row mb-0">
                                 <div class="">
-                                    <input form="hiteles-form" type="submit" value="Adatok hitelesek, előfizetés indítása, esetleges tartozás" class="btn btn-success">
+                                    <input form="hiteles-form" type="submit" value="Adatok hitelesek, előfizetés indítása" class="btn btn-success">
                                 </div>
                             </div>
                         @endif
