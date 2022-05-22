@@ -51,6 +51,9 @@ class UserController extends Controller
     public function index($id)
     {
         $member = User::find($id);
+
+        $result = (new BadgeController)->numbersForBadgesAsEmp($member->email);
+
         $subs = DB::table('oldsubs')
         ->where('oldsubs.email', '=', $member->email)
         ->orderBy('to', 'desc')

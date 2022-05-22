@@ -80,7 +80,7 @@ class RentalController extends Controller
         $rent->save();
         $res->delete();
 
-        //session(['rentfromres' => 'A könyv kikölcsönözve!']);
+        session(['rentfromres' => 'A könyv kikölcsönözve!']);
 
         return redirect('/active-rentals');
     }
@@ -137,7 +137,7 @@ class RentalController extends Controller
             ->update(['plus_charge' => ($subscription[0]->plus_charge) - ($difference * 50)]);
         }
 
-        //session(['bookback' => 'A könyv visszahozva!']);
+        session(['bookback' => 'A könyv visszahozva!']);
 
         return redirect('/closed-rentals');
     }

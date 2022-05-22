@@ -74,6 +74,11 @@
         echo "<script>alert('".session('rent')."');</script>";
         session()->forget('rent');
     }
+
+    if(session()->has('rentfromres')){
+        echo "<script>alert('".session('rentfromres')."');</script>";
+        session()->forget('rentfromres');
+    }
 ?>
 
 @endsection

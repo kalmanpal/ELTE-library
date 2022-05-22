@@ -30,10 +30,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::get('/book/new', function () {
-//     return view('employee/new_book');
-// });
-
 //-------------------------------------------------EMPLOYEE---------------------------------------------------------------------
 
 Route::group(['middleware' => ['empPages']], function(){
@@ -52,11 +48,13 @@ Route::group(['middleware' => ['empPages']], function(){
     Route::get('/activate/{id}',[UserController::class,'activateSub']);
 
     Route::get('/reservations',[ReservationController::class,'showAllReservations']);
+    Route::get('/emp-search-res-results',[ReservationController::class,'searchResByEmp']);
 
     Route::get('/rent/{id}',[RentalController::class,'rentBook']);
     Route::get('rent-from-res/{id}',[RentalController::class,'rentFromReservations']);
 
     Route::get('/active-rentals',[RentalController::class,'showActiveRentals']);
+    Route::get('/emp-search-rents-results',[RentalController::class,'searchRentsByEmp']);
     Route::get('/closed-rentals',[RentalController::class,'showClosedRentals']);
 
     Route::get('book-is-back/{id}',[RentalController::class,'bookIsBack']);
@@ -101,5 +99,5 @@ Route::group(['middleware' => ['comPages']], function(){
 
 //--------------------------------------------------NOT FINISHED------------------------------------------------------
 
-Route::get('/emp-search-res-results',[ReservationController::class,'searchResByEmp']);
-Route::get('/emp-search-rents-results',[RentalController::class,'searchRentsByEmp']);
+
+

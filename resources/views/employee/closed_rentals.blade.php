@@ -59,4 +59,11 @@
     {{$rentals->links()}}
 </div>
 
+<?php
+    if(session()->has('bookback')){
+        echo "<script>alert('".session('bookback')."');</script>";
+        session()->forget('bookback');
+    }
+?>
+
 @endsection

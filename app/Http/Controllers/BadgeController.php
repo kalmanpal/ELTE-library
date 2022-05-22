@@ -132,4 +132,125 @@ class BadgeController extends Controller
 
         return view('member/badges', ['data' => $data]);
     }
+
+
+    public function numbersForBadgesAsEmp($emailForBadges)
+    {
+        $dataToUpdate = DB::table('badges')
+        ->where('badges.email', '=', $emailForBadges)
+        ->get();
+
+        $allRentals = DB::table('rentals')
+            ->where('rentals.email', '=', $emailForBadges)
+            ->get();
+        $allRentsNumber = $allRentals->count();
+
+        if(($allRentsNumber >= 5)&($dataToUpdate[0]->five != 1)){
+            $badgeToUpdate = DB::table('badges')
+            ->where('badges.email', $emailForBadges)
+            ->update([
+                'five' => '1'
+            ]);
+
+            $sub = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', $emailForBadges)
+            ->get();
+
+            $subToUpdate = DB::table('subscriptions')
+            ->where('subscriptions.email', $emailForBadges)
+            ->update([
+                'discounts' => $sub[0]->discounts + 5
+            ]);
+        }
+
+        if(($allRentsNumber >= 10)&($dataToUpdate[0]->ten != 1)){
+            $badgeToUpdate = DB::table('badges')
+            ->where('badges.email', $emailForBadges)
+            ->update([
+                'ten' => '1'
+            ]);
+
+            $sub = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', $emailForBadges)
+            ->get();
+
+            $subToUpdate = DB::table('subscriptions')
+            ->where('subscriptions.email', $emailForBadges)
+            ->update([
+                'discounts' => $sub[0]->discounts + 10
+            ]);
+        }
+
+        if(($allRentsNumber >= 20)&($dataToUpdate[0]->twenty != 1)){
+            $badgeToUpdate = DB::table('badges')
+            ->where('badges.email', $emailForBadges)
+            ->update([
+                'twenty' => '1'
+            ]);
+
+            $sub = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', $emailForBadges)
+            ->get();
+
+            $subToUpdate = DB::table('subscriptions')
+            ->where('subscriptions.email', $emailForBadges)
+            ->update([
+                'discounts' => $sub[0]->discounts + 20
+            ]);
+        }
+
+        $onTimeRentals = DB::table('rentals')
+        ->where('rentals.email', '=', $emailForBadges)
+        ->whereNotNull('in_date')
+        ->get();
+        $n = $onTimeRentals->count();
+
+        $onTimeNumber = 0;
+        for($i = 0; $i < $n; $i+=1){
+            if($onTimeRentals[$i]->in_date <= $onTimeRentals[$i]->deadline){
+                $onTimeNumber++;
+            }
+        }
+
+        if(($onTimeNumber >= 10)&($dataToUpdate[0]->ontime != 1)){
+            $badgeToUpdate = DB::table('badges')
+            ->where('badges.email', $emailForBadges)
+            ->update([
+                'ontime' => '1'
+            ]);
+
+            $sub = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', $emailForBadges)
+            ->get();
+
+            $subToUpdate = DB::table('subscriptions')
+            ->where('subscriptions.email', $emailForBadges)
+            ->update([
+                'discounts' => $sub[0]->discounts + 5
+            ]);
+        }
+
+        $allSubs = DB::table('oldsubs')
+        ->where('oldsubs.email', '=', $emailForBadges)
+        ->get();
+        $allSubsNumber = $allSubs->count();
+
+        if(($allSubsNumber >= 2)&($dataToUpdate[0]->oneyear != 1)){
+            $badgeToUpdate = DB::table('badges')
+            ->where('badges.email', $emailForBadges)
+            ->update([
+                'oneyear' => '1'
+            ]);
+
+            $sub = DB::table('subscriptions')
+            ->where('subscriptions.email', '=', $emailForBadges)
+            ->get();
+
+            $subToUpdate = DB::table('subscriptions')
+            ->where('subscriptions.email', $emailForBadges)
+            ->update([
+                'discounts' => $sub[0]->discounts + 10
+            ]);
+        }
+    }
 }
