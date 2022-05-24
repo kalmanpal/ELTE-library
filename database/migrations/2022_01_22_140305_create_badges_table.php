@@ -22,7 +22,6 @@ class CreateBadgesTable extends Migration
             $table->boolean('twenty')->default('0');
             $table->boolean('oneyear')->default('0');
             $table->boolean('ontime')->default('0');
-            $table->boolean('friend')->default('0');
             $table->timestamps();
         });
     }
