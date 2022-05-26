@@ -55,7 +55,7 @@
                                             @else
                                                 <td style="color: red">Lejárt</td>
                                             @endif
-                                            <td data-toggle="popover" title="Díjszámítás" data-trigger="hover focus" data-content="Alapdíj={{ $allSubs[0]->price }}Ft, kedvezmény felhasználva={{ $item->discount }}%, késedelmi díjak={{ $item->plusfee }}Ft.">{{ $item->paidfee }}</td>
+                                            <td >{{ $item->paidfee }} Ft <img data-toggle="popover" title="Díjszámítás" data-trigger="hover focus" data-content="Alapdíj={{ $allSubs[0]->price }}Ft, kedvezmény felhasználva={{ $item->discount }}%, késedelmi díjak={{ $item->plusfee }}Ft." src="https://cdn2.iconfinder.com/data/icons/generic-06/100/Artboard_130-256.png" style="width: 18px">  </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
