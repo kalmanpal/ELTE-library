@@ -38,7 +38,9 @@
                     @endif
                 </div>
             </div>
-            {{$books->links()}}
+            <div class="paginate-container">
+                {{$books->links()}}
+            </div>
         </div>
     </div>
 </div>

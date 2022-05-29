@@ -42,9 +42,11 @@
                     </div>
                 </div>
             </div>
-            {{$books->links()}}
         </div>
     </div>
+</div>
+<div class="paginate-container">
+    {{$books->links()}}
 </div>
 
 <?php
